@@ -7,6 +7,15 @@
 .lvl3{
 	background-color: rgb(211, 47, 47);
 }
+.lvl1-6{
+	background-color: rgb(255, 168, 10);
+}
+.lvl2-6{
+	background-color: rgb(232, 110, 44);
+}
+.lvl3-6{
+	background-color: rgb(255, 63, 56);
+}
 .jumbotron-img {
 	background-image: url(img/html-color-codes-color-tutorials.jpg);
 	background-size: cover;
@@ -14,6 +23,12 @@
 	color:white;
 }
 .sprint5{
-	color: rgb(93, 64, 55);
+	color: rgb(211, 47, 47);
+}
+.sprint6{
+	color: rgb(211, 47, 47);
 }
 
+code{
+	color:black;
+}

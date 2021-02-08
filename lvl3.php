@@ -1,5 +1,5 @@
 <?php
-require "sprint5.php";
+require "sprints.php";
 ?>
 
 		<div class="container-fluid bg-3 lvl3">
