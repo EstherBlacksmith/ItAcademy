@@ -12,9 +12,9 @@ class PaisController extends Controller
     }
      
     public function store()
-    {
-        return "Has almacenado $pais";
-        //return view('paises');
+    {       
+        //return "Has almacenado $pais";
+        return view('paises');
     }
     
     public function show($pais)

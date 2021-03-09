@@ -13,8 +13,9 @@ and open the template in the editor.
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </head>
-    <body>
+    <body>        
         <div class="card-body">
             <div class="card alert-danger">
              @yield('content')

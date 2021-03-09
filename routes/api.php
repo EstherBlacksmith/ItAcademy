@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('paises',[App\Http\Controllers\PaisController::class, 'store']);
+Route::delete('paises/{pais}',[App\Http\Controllers\PaisController::class, 'destroy']);
+Route::put('paises/{pais}',[App\Http\Controllers\PaisController::class, 'update']);
+
+
+Route::post('paises/{pais}/departamentos',[App\Http\Controllers\DepartamentoController::class, 'store']);
+Route::delete('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'destroy']);
+Route::put('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'update']);

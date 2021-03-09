@@ -33,17 +33,21 @@ Route::get('/vista2', 'App\Http\Controllers\Vista2Controller@get');
 Route::get('/vista3', 'App\Http\Controllers\Vista3Controller@get');
 
 //Exercici 5
+
+//NOTA: las rutas comentadas están en el achivo routes/api.php ya que de otra manera no funcionaban en Postman
+
 Route::get('paises',[App\Http\Controllers\PaisController::class, 'index']);
-Route::post('paises',[App\Http\Controllers\PaisController::class, 'store']);
+/*Route::post('paises',[App\Http\Controllers\PaisController::class, 'store']);*/
 Route::get('paises/{pais}',[App\Http\Controllers\PaisController::class, 'show']);
-Route::put('paises/{pais}',[App\Http\Controllers\PaisController::class, 'update']);
-Route::delete('paises/{pais}',[App\Http\Controllers\PaisController::class, 'destroy']);
+/*Route::put('paises/{pais}',[App\Http\Controllers\PaisController::class, 'update']);*/
+/*Route::delete('paises/{pais}',[App\Http\Controllers\PaisController::class, 'destroy']);*/
 
 Route::get('paises/{pais}/departamentos',[App\Http\Controllers\DepartamentoController::class, 'index']);
-Route::post('paises/{pais}/departamentos',[App\Http\Controllers\DepartamentoController::class, 'store']);
+/*Route::post('paises/{pais}/departamentos',[App\Http\Controllers\DepartamentoController::class, 'store']);*/
 Route::get('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'show']);
-Route::put('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'update']);
-Route::delete('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'destroy']);
+/*Route::put('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'update']);*/
+/*Route::delete('paises/{pais}/departamentos/{departamento}',[App\Http\Controllers\DepartamentoController::class, 'destroy']);*/
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

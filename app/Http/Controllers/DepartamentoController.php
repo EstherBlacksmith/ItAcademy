@@ -13,7 +13,6 @@ class DepartamentoController extends Controller
      
     public function store()
     {
-        dd('Hola Nancy!');
         return view('departamento');
     }
     

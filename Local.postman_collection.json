@@ -1,65 +1,15 @@
 {
 	"info": {
-		"_postman_id": "21a213ac-d076-46e8-a41d-3163b435026d",
-		"name": "Laravel",
+		"_postman_id": "6ce9b57d-44cc-476b-b3a3-a30c1d96d1b9",
+		"name": "Local",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Ejercicio 3",
-			"item": [
-				{
-					"name": "http://127.0.0.1:8000/vista1/Paco",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/vista1/Paco",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"vista1",
-								"Paco"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Ejercicio 6-Paises",
+			"name": "Paises",
 			"item": [
 				{
 					"name": "INDEX",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/paises",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"paises"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SHOW",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -104,30 +54,6 @@
 					"response": []
 				},
 				{
-					"name": "SHOW",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/paises/Perú",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"paises",
-								"Perú"
-							]
-						},
-						"description": "SHOW"
-					},
-					"response": []
-				},
-				{
 					"name": "DESTROY",
 					"request": {
 						"method": "DELETE",
@@ -146,6 +72,51 @@
 								"api",
 								"paises",
 								"Andorra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/paises",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"paises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/paises/Perú",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"paises",
+								"Perú"
 							]
 						}
 					},
@@ -178,39 +149,15 @@
 			]
 		},
 		{
-			"name": "Ejercicio 6-Paises/Departamentos",
+			"name": "Paises/Departamentos",
 			"item": [
-				{
-					"name": "INDEX",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/paises/Francia/departamentos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"paises",
-								"Francia",
-								"departamentos"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "SHOW",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/paises/Francia/departamentos/Carcaçone",
+							"raw": "http://127.0.0.1:8000/paises/Perú/departamentos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -221,9 +168,8 @@
 							"port": "8000",
 							"path": [
 								"paises",
-								"Francia",
-								"departamentos",
-								"Carcaçone"
+								"Perú",
+								"departamentos"
 							]
 						}
 					},
@@ -255,6 +201,30 @@
 					"response": []
 				},
 				{
+					"name": "INDEX",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/paises/Francia/departamentos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"paises",
+								"Francia",
+								"departamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "SHOW",
 					"request": {
 						"method": "GET",
@@ -275,8 +245,7 @@
 								"departamentos",
 								"Lima"
 							]
-						},
-						"description": "SHOW"
+						}
 					},
 					"response": []
 				},
@@ -312,7 +281,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/paises/Andorra/departamentos/ciutat vella",
+							"raw": "http://127.0.0.1:8000/api/paises/Andorra/departamentos/carrer del peix",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -326,13 +295,43 @@
 								"paises",
 								"Andorra",
 								"departamentos",
-								"ciutat vella"
+								"carrer del peix"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": ""
+		},
+		{
+			"key": "post",
+			"value": "8000"
 		}
 	]
 }
