@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "21a213ac-d076-46e8-a41d-3163b435026d",
+		"name": "Laravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/vista1/saludo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/vista1/Paco",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"vista1",
+						"Paco"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
