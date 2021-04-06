@@ -1,6 +1,12 @@
 @extends('layout')
+@section('title','Home')
 
 @section('content')
-   <h1>HOME!</h1>  
+
+@section('title2','Home')
+<div class="mb-3">      
+    <h5>Welcome!!</h5>
+  </div>
+
 
 @endsection

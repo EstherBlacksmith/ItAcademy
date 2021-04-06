@@ -1,10 +1,7 @@
 @extends('layout')
 @section('title','Eliminar libro')
-
 @section('content')
 
-@section('title2','Eliminar libro')
-<h3>Eliminar libro</h3>
-
+<h3>Libro eliminado</h3>
 
 @endsection

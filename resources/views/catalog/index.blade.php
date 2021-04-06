@@ -1,6 +1,11 @@
 @extends('layout')
+@section('title','Index')
 
 @section('content')
-   <h1>INDEX!</h1>
+
+@section('title2','Index')
+<h3>Index</h3>
+
+
 
 @endsection

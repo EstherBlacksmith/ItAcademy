@@ -12,7 +12,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
+    protected $dontReport = [        
         //
     ];
 
@@ -34,8 +34,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (Throwable $e) {
+            return response()->view('errors.custom', [], 404);
         });
     }
 }
