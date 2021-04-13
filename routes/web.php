@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\EmpleadosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,20 @@ use App\Http\Controllers\EmpleadosController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';*/
+
+
+Route::get('/', function () {
+    return view('home');
 });
 
 Route::get('/home', function () {
@@ -24,17 +36,11 @@ Route::get('/home', function () {
 
 /** CRUD **/
 /* create */
-/*Route::get('/create', function () {
-    return view('empleados.create');
-})->name('create');
-*/
+
 Route::get('/create', [TareasController::class,'mostrarEmpleado'])->name('createEmpleado');
 
 Route::post('/create', [EmpleadosController::class,'storeEmpleado'])->name('storeEmpleado');
 
-Route::get('/createEmpleadoOK',function(){
-	return "Empleado creado correctamente";
-})->name('createEmpleadoOK');
 
 /* create tareas*/
 Route::get('/createTarea', [TareasController::class,'mostrarTarea'])->name('createTarea');
@@ -62,6 +68,9 @@ Route::put('/update', function () {
 });
 
 /* read */
-Route::get('/show', function () {
-    return view('empleados.show');
-})->name('show');
+Route::get('/show', [EmpleadosController::class,'filtraEmpleado'])->name('show');
+
+/* login */
+Route::get('/login', [EmpleadosController::class,'filtraEmpleado'])->name('login');
+
+?>

@@ -10,16 +10,18 @@ use App\Models\Tarea;
 
 class TareasController extends Controller
 {
-	
+	public function getTareas(){
+		$tareas = Tarea::all();
+		return $tareas;
+	}
 
 	public function mostrarTarea(){
-		$tareas = DB::table('tareas')->get();
-	    return view('empleados.createTarea', ['tareas' => $tareas]);
+	    return view('empleados.createTarea', ['tareas' => $this->getTareas()]);
     }
 
-	public function mostrarEmpleado(){
-		$tareas = DB::table('tareas')->get();   
-		return view('empleados.create', ['tareas' => $tareas]);
+	//La vista que crea los empelados hace uso de las tareas
+	public function mostrarEmpleado(){	
+		return view('empleados.create', ['tareas' => $this->getTareas()]);
     }
 
    public function store(Request $request)
