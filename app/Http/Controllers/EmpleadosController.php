@@ -8,21 +8,22 @@ use App\Models\Tarea;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-
+use Illuminate\Support\Facades\Validator; 
 class EmpleadosController extends Controller
 {
 
-	public function mostrarEmpleado($id){
-		$empleado = Empleado::findOrFail($id);	
+	public function mostrarEmpleado(Request $request){
+
+		$empleado = Empleado::findOrFail($request->id);	
 		$tareas = Tarea::all();
+
 	    return view('empleados.update', ['empleado' => $empleado,'tareas' => $tareas]);
     }
 
 
     public function filtraEmpleado(Request $request){    	
-
 		$tareas = Tarea::all();
-		
+
     	if($request->id_tarea == null){
     		$empleados = Empleado::all();
     	}else{
@@ -31,7 +32,6 @@ class EmpleadosController extends Controller
 	    				->get();	
 
 		}
-
 	    return view('empleados.show', ['empleados' => $empleados,'tareas' => $tareas]);		
 	    
     }
@@ -53,6 +53,7 @@ class EmpleadosController extends Controller
   	        'id_tarea.required' => 'La tarea es obligatoria',	      
     	]);
 
+
 		$empleado = new Empleado;
 		$empleado->nombre =  $request->input('nombre');
 		$empleado->primerApellido =  $request->input('primerApellido');
@@ -61,11 +62,12 @@ class EmpleadosController extends Controller
 		$empleado->save();
 
 		return redirect()->route('show');
-	}    
 
+	}   
+	
 
 	public function updateEmpleado(Request $request)
-    {
+    {    	
 	    $validated = $request->validate([
 	        'nombre' => 'required | max:50',
 	        'primerApellido' => 'required | max:255',
@@ -78,12 +80,13 @@ class EmpleadosController extends Controller
   	        'primerApellido.required' => 'El nombre del empleado es obligatorio',	
   	        'id_tarea.required' => 'La tarea es obligatoria',	      
     	]);
-	
-		Empleado::find($request->id)->update($validated);   
+
+		Empleado::find($request->idEdit)->update($validated);   
 		return redirect()->route('show');
 	}    
 
-	public function deleteEmpleado($id){
+	public function deleteEmpleado(Request $request){
+		$id = $request->input('id');
 		$empleado = Empleado::findOrFail($id);	
 		$empleado->delete();
 	    return redirect()->route('show');

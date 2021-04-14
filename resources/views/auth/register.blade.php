@@ -1,11 +1,19 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.layout')
+@section('title', 'Inicio de sesión')
 
+@section('content')
+
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+         <img src="panda-logo.png" class="card-img-top" style=" width: 20%;
+          height: auto;">
+            <div class="card-header bg-dark text-white">
+                <h3 class=" bg-dark text-white">Inicia sesión</h3>
+            </div>  
+            <div class="card-body ">
+                <!-- Session Status -->
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -55,5 +63,9 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+            </div>
+        </div>      
+    </div>
+</div>
+
+@endsection

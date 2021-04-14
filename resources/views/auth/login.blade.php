@@ -10,7 +10,7 @@
          <img src="panda-logo.png" class="card-img-top" style=" width: 20%;
           height: auto;">
             <div class="card-header bg-dark text-white">
-                <h3 class=" bg-dark text-white">¡Error 404!</h3>
+                <h3 class=" bg-dark text-white">Inicia sesión</h3>
             </div>  
             <div class="card-body ">
                 <!-- Session Status -->
@@ -31,7 +31,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('Contraseña')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"

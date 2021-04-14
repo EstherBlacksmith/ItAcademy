@@ -18,9 +18,7 @@ class CreateEmpleadosTable extends Migration
             $table->timestamps();
             $table->String('nombre');
             $table->String('primerApellido');
-            $table->String('segundoApellido');
-            $table->bigInteger('id_tarea');
-           // $table->foreign('id_tarea')->references('id')->on('tareas');
+            $table->String('segundoApellido');       
 
         });
     }

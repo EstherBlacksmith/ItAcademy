@@ -3,7 +3,7 @@
 @section('title', 'Mostrar empleados')
 
 @section('content')
-<!--<div class="container ">
+<div class="container ">
 	<div class="row ">
 		<div class="col col-lg-2">	
 			<div class="card">
@@ -38,6 +38,7 @@
 					<div class="card-header bg-dark text-white">
 						<h3>Empleados</h3>
 					</div>
+					
 					<div class="card-body ">
 						<div class="row justify-content-md-center overflow-auto" style="max-width: 100%; max-height: 700px;">
 							<ul class="list-group list-group-flush ">   	 	     
@@ -53,18 +54,20 @@
 												<p> {{$tarea->descripcion }}  </p>
 											@endif
 										@endforeach
-										<div class="row">
+										<div class="row">											
 											<div class="col-lg-2"> 
 												<button type="button" class="btn btn-info" aria-current="true">
-													<a href="{{route('update')}}/{{$empleado->id}}">
+													<a href="{{route('updateView',$empleado->id)}}">
 			  											<i class="icon-pencil icon-large"></i> 
 			  										</a>	
 		  										</button>
 		  									</div>
+											
 			  								<div class="col-lg-2"> 
-												<form method="POST" action="{{route('deleteEmpleado')}}/{{$empleado->id}}">
+												<form method="POST" action="{{route('deleteEmpleado')}}">
 													@csrf
 													@method('delete')	
+													<input type="hidden" name="id" id="id" value="{{$empleado->id}}">
 													<button type="submit" class="btn btn-danger" aria-current="true">
 				  										<i class="icon-trash icon-large"></i> 
 													</button>    		
@@ -78,9 +81,11 @@
 						</div>
 					</div>
 				</div>
+
+
 			</div>
 		</div>
 </div>
 
--->
+
 @endsection

@@ -29,9 +29,12 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('createTarea') }}">Tareas</a>
     </li>
-    <li class="nav-item">
+  <!--  <li class="nav-item">
       <a class="nav-link" href="{{ route('login') }}">Inicia sesión</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('register') }}">Regístrate</a>
+    </li>-->
   </ul>
 </nav>
 

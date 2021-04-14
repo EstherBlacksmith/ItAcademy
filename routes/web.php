@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,24 +55,31 @@ Route::get('/delete', function () {
     return view('empleados.delete');
 })->name('delete');
 
-Route::delete('/delete', function () {
-    return view('empleados.delete');
-});
+Route::delete('/delete', [EmpleadosController::class,'deleteEmpleado'])->name('deleteEmpleado');
 
 
 /* update */
-Route::get('/update', function () {
-    return view('empleados.update');
-})->name('update');
+Route::get('/update/{id}', [EmpleadosController::class,'mostrarEmpleado'])->name('updateView');
 
-Route::put('/update', function () {
-    return view('empleados.update');
-});
+Route::put('/update', [EmpleadosController::class,'updateEmpleado'])->name('updateEmpleado');
+
 
 /* read */
 Route::get('/show', [EmpleadosController::class,'filtraEmpleado'])->name('show');
 
 /* login */
-Route::get('/login', [EmpleadosController::class,'filtraEmpleado'])->name('login');
+
+Route::get('/register',   function () {
+    return view('auth.register');
+})-> name('register');
+
+
+/*
+Route::post('/register', [RegisteredUserController::class,'store'])-> name('storeUser');*/
+
+
+Route::get('/login',  [LoginController::class,'login'])-> name('login');
+/*
+Route::post('/login',[LoginController::class,'login']);*/
 
 ?>
