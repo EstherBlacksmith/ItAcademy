@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator; 
 
 
 class RegisteredUserController extends Controller
@@ -32,22 +33,38 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-      
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+    { 
+
+       $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:users',
+            'password' => 'required',
+            'password_confirmation'=>'required',
+
+        ],
+        [
+            'name.required' => 'El nombre de usuario es obligatorio',       
+            'email.required' => 'El email es obligatorio',  
+            'password.required' => 'La contraseña es obligatoria',    
+            'password_confirmation.required' => 'La contraseña confirmada es obligatoria',    
+
         ]);
 
-        Auth::login($user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]));
+      
+       if ($validator->fails())
+        {   return redirect()->back()->withErrors($validator);
+        }else{           
+            
+            Auth::login($user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]));
 
-        event(new Registered($user));
+            event(new Registered($user));
+            return redirect(RouteServiceProvider::HOME);
+        }     
+           
 
-        return redirect(RouteServiceProvider::HOME);
     }
 }

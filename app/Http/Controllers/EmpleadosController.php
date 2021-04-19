@@ -40,7 +40,7 @@ class EmpleadosController extends Controller
     public function storeEmpleado(Request $request)
     {
 
-	    $validated = $request->validate([
+	   $validator = Validator::make($request->all(), [
 	        'nombre' => 'required | max:50',
 	        'primerApellido' => 'required | max:255',
 	        'segundoApellido' => 'required | max:255',
@@ -49,43 +49,36 @@ class EmpleadosController extends Controller
 	    ],
    		[
 	        'nombre.required' => 'El nombre del empleado es obligatorio',	    
-  	        'primerApellido.required' => 'El nombre del empleado es obligatorio',	
-  	        'id_tarea.required' => 'La tarea es obligatoria',	      
+  	        'primerApellido.required' => 'El primer apellido del empleado es obligatorio',	
+  	        'segundoApellido.required' => 'El segundo apellido del empleado es obligatorio',	
+  	        'id_tarea.required' => 'La tarea es obligatoria',		      
     	]);
 
+   		if ($validator->fails())
+        {   
+       		return redirect()->back()->withErrors($validator);
+        }else{
+        	//Si no existe el id, es que el empleado no existe, lo creamos
+        	if(!$request->id ) 
+        	{
+        		$empleado = new Empleado;
+        	}else{ 
+        		//si existe, lo actualizamos
+        		$empleado = Empleado::find($request->id); 
+        	}
+			
+			$empleado->nombre =  $request->input('nombre');
+			$empleado->primerApellido =  $request->input('primerApellido');
+			$empleado->segundoApellido =  $request->input('segundoApellido');
+			$empleado->id_tarea =  $request->input('id_tarea');
+			$empleado->save();
 
-		$empleado = new Empleado;
-		$empleado->nombre =  $request->input('nombre');
-		$empleado->primerApellido =  $request->input('primerApellido');
-		$empleado->segundoApellido =  $request->input('segundoApellido');
-		$empleado->id_tarea =  $request->input('id_tarea');
-		$empleado->save();
+			return redirect()->route('show');
+		}
 
-		return redirect()->route('show');
+	}   	
 
-	}   
 	
-
-	public function updateEmpleado(Request $request)
-    {    	
-	    $validated = $request->validate([
-	        'nombre' => 'required | max:50',
-	        'primerApellido' => 'required | max:255',
-	        'segundoApellido' => 'required | max:255',
-	        'id_tarea' => 'required',
-
-	    ],
-   		[
-	        'nombre.required' => 'El nombre del empleado es obligatorio',	    
-  	        'primerApellido.required' => 'El nombre del empleado es obligatorio',	
-  	        'id_tarea.required' => 'La tarea es obligatoria',	      
-    	]);
-
-		Empleado::find($request->id)->update($validated);   
-
-		return redirect()->route('show');
-	}    
-
 	public function deleteEmpleado(Request $request){
 		$id = $request->input('id');
 		$empleado = Empleado::findOrFail($id);	

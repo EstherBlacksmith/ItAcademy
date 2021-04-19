@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,9 +53,10 @@ Route::post('/createTarea', [TareasController::class,'store'])->name('storeTarea
 
 
 /* delete */
+/*
 Route::get('/delete', function () {
     return view('empleados.delete');
-})->name('delete');
+})->name('delete');*/
 
 Route::delete('/delete', [EmpleadosController::class,'deleteEmpleado'])->name('deleteEmpleado');
 
@@ -61,25 +64,27 @@ Route::delete('/delete', [EmpleadosController::class,'deleteEmpleado'])->name('d
 /* update */
 Route::get('/update/{id}', [EmpleadosController::class,'mostrarEmpleado'])->name('updateView');
 
-Route::put('/update', [EmpleadosController::class,'updateEmpleado'])->name('updateEmpleado');
+Route::put('/update', [EmpleadosController::class,'storeEmpleado'])->name('updateEmpleado');
 
 
 /* read */
 Route::get('/show', [EmpleadosController::class,'filtraEmpleado'])->name('show');
 
+
+/* register */
+Route::get('/register', [RegisteredUserController::class,'create'])-> name('register');
+
+Route::post('/register', [RegisteredUserController::class,'store'])-> name('storeUser');
+
 /* login */
+Route::get('/login', [AuthenticatedSessionController::class,'create'])-> name('login');
 
-Route::get('/register',   function () {
-    return view('auth.register');
-})-> name('register');
-
-
-/*
-Route::post('/register', [RegisteredUserController::class,'store'])-> name('storeUser');*/
+Route::post('/login',[AuthenticatedSessionController::class,'store']);
 
 
-Route::get('/login',  [LoginController::class,'login'])-> name('login');
-/*
-Route::post('/login',[LoginController::class,'login']);*/
+/* password */
+Route::get('/forgot-password', [PasswordResetLinkController::class,'create'])-> name('forgot-password');
+
+Route::post('/password-email',[PasswordResetLinkController::class,'store'])->name('password-email');
 
 ?>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function login(){
-    	dd(Auth::user());
+    	return view('auth.login');
     }
 
 }
