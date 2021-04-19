@@ -81,7 +81,8 @@ class EmpleadosController extends Controller
   	        'id_tarea.required' => 'La tarea es obligatoria',	      
     	]);
 
-		Empleado::find($request->idEdit)->update($validated);   
+		Empleado::find($request->id)->update($validated);   
+
 		return redirect()->route('show');
 	}    
 
