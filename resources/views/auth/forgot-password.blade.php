@@ -14,7 +14,7 @@
                 <div class="mb-4 text-sm text-gray-600">
                     ¿Has perdido la contraseña? No hay problema. Solo debes indicarnos el email con el que te registraste y nosotros nos encargamos de enviarte un enlace para que elijas una nueva
                 </div>
-                <form method="POST" action="{{ route('password-email') }}">
+                <form method="POST" action="{{ route('forgot-password') }}">
                     @csrf
 
                     <!-- Email Address -->

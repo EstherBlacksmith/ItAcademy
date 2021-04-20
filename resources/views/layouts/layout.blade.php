@@ -13,8 +13,7 @@
 <title>@yield('title')</title>
 </head>
 
-<body> 
-
+<body style="background-color: white; background-image:url(43362.jpg)">
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> 
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -49,4 +48,10 @@
 
 
 </body>
+<footer >
+  <div class="mx-auto fixed-bottom bg-transparent" style="width: 500px;">
+    <a href='https://www.freepik.es/vectores/fondo' class="text-dark">Vector de Fondo creado por rawpixel.com - www.freepik.es</a>
+  </div>
+</footer>
+
 </html>

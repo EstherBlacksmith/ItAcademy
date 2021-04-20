@@ -85,6 +85,6 @@ Route::post('/login',[AuthenticatedSessionController::class,'store']);
 /* password */
 Route::get('/forgot-password', [PasswordResetLinkController::class,'create'])-> name('forgot-password');
 
-Route::post('/password-email',[PasswordResetLinkController::class,'store'])->name('password-email');
+Route::post('/forgot-password',[PasswordResetLinkController::class,'store'])->name('password-email');
 
 ?>

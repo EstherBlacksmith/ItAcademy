@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class muestraUsuarioMiddelware
 {
@@ -14,13 +15,25 @@ class muestraUsuarioMiddelware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
-    {
+        public function handle(Request $request, Closure $next)
+    {       
+        
+        if($request->hasCookie('email')) {
 
-        $response = $next($request);
+            $user = User::where('email',$request->cookie('email')) -> first();
+            echo '<nav class="navbar navbar-light text-dark" >';      
+            echo "Hola " . $user->name;
+            echo "</nav>"; 
 
-         echo 'usuario' ;
-        return $response;
+            return $next($request);    
+        }     
+        else{
+            echo '<nav class="navbar navbar-light text-dark" >';      
+            echo "¡Hola!, Inicia sesión";
+            echo "</nav>"; 
 
+        } 
+       
+        return $next($request);
     }
 }
