@@ -20,7 +20,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $( document ).ready(function() {
 
+        $('#fecha').datepicker();
+    });
+</script>
 <title>@yield('title')</title>
 </head>
 
@@ -46,7 +51,6 @@
                <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded" aria-labelledby="navbarDropdown"  data-bs-popper="none">
                   <li><a class="dropdown-item fw-bold link-success"  href="{{route('equiposIndex')}}">Mostrar</a></li>
                   <li><a class="dropdown-item fw-bold link-success"  href="{{route('equiposCreate')}}">Crear</a></li>
-                  <li><a class="dropdown-item fw-bold link-success"  href="#">Editar</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -55,8 +59,7 @@
                 </a>
                 <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded" aria-labelledby="navbarDropdown"  data-bs-popper="none">
                   <li><a class="dropdown-item fw-bold link-success" href="{{route('partidosIndex')}}">Mostrar</a></li>
-                  <li><a class="dropdown-item fw-bold link-success" href="#">Crear</a></li>
-                  <li><a class="dropdown-item fw-bold link-success" href="#">Editar</a></li>
+                  <li><a class="dropdown-item fw-bold link-success" href="{{route('partidosCreate')}}">Crear</a></li>
                 </ul>
               </li>
 
@@ -95,7 +98,19 @@
   <div class="container">
     <div class="col-md-8 fw-bold mb-5 rounded" >   
       @yield('content')
-          </div>  
+    
+
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
+  </div>  
+
   </div>
 </body>
 

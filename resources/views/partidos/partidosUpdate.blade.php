@@ -5,18 +5,11 @@
 
 @section('content')
 
-<script>
-    $( document ).ready(function() {
-
-        $('#fecha').datepicker();
-    });
-</script>
-
 <div style="color: silver;">
   <h2 class="col-auto p-5 text-center" >Edición de partidos <i class="fas fa-trophy"></i></h2>
   <h5 class="text-center m5">Aquí puedes editar los datos de los partidos</h5>
 
-	<form method="post" action="#">
+	<form method="post" action="{{route('partidosUpdateStore')}}">
 		@csrf
 
 		<div class="form-group input-group-lg">
@@ -24,9 +17,9 @@
 		    <select class="form-select " id="ciudad" name="ciudad" >
 				@foreach($equipos as $equipo)
 				 	@if($partido->teams_id == $equipo->id)
-				   		<option selected  value="{{$equipo->id}}}">{{$equipo->city}}</option>
+				   		<option selected  value="{{$equipo->id}}">{{$equipo->city}}</option>
 				   	@else
-				   		<option value="{{$equipo->id}}}">{{$equipo->city}}</option>
+				   		<option value="{{$equipo->id}}">{{$equipo->city}}</option>
 				    @endif
 			 	@endforeach
 			</select>
@@ -57,4 +50,4 @@
 	
 </div>
 
-@stop
+@endsection

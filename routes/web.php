@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\TeamsController;
 use  App\Http\Controllers\MatchesController;
+use  App\Http\Controllers\AdminController;
+use  App\Http\Controllers\PlayerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,11 +32,11 @@ Route::get('/equiposIndex',[TeamsController::class,'index'])->name('equiposIndex
 
 Route::get('/equiposCreate',[TeamsController::class,'equiposCreate'])->name('equiposCreate');
 
-Route::post('/equiposCreate',[TeamsController::class,'equiposCreateStore'])->name('equiposCreateStore');
+Route::post('/equiposCreate',[TeamsController::class,'equiposCreateStore'])->name('equiposCreateStore')->middleware('admin');
 
 Route::get('/equiposUpdate/{id}',[TeamsController::class,'update'])->name('equiposUpdate');
 
-Route::post('/equiposUpdate',[TeamsController::class,'equiposUpdateStore'])->name('equiposUpdateStore');
+Route::post('/equiposUpdate',[TeamsController::class,'equiposUpdateStore'])->name('equiposUpdateStore')->middleware('admin');
 
 Route::get('/equiposDelete/{id}', [TeamsController::class,'equiposDelete'])->name('equiposDelete');
 
@@ -43,22 +45,21 @@ Route::get('/equiposDelete/{id}', [TeamsController::class,'equiposDelete'])->nam
 
 Route::get('/partidosIndex',[MatchesController::class,'index'])->name('partidosIndex');
 
-Route::get('/partidosCreate', function () {
-    return view('partidos.partidosCreate');
-});
+Route::get('/partidosCreate', [MatchesController::class,'partidosCreate'])->name('partidosCreate');
+
+Route::post('/partidosCreate', [MatchesController::class,'partidosCreateStore'])->name('partidosCreateStore')->middleware('admin');
+
 
 Route::get('/partidosUpdate/{id}', [MatchesController::class,'partidosUpdate'])->name('partidosUpdate');
 
-Route::post('/partidosUpdate/{id}',[MatchesController::class,'partidosUpdateStore'])->name('partidosUpdateStore');
+Route::post('/partidosUpdate',[MatchesController::class,'partidosUpdateStore'])->name('partidosUpdateStore')->middleware('admin');
 
-Route::get('/partidosDelete', function () {
-    return view('partidos.partidosDelete');
-});
+Route::get('/partidosDelete/{id}',[MatchesController::class,'partidosDelete'])->name('partidosDelete')->middleware('admin');
 
-Route::post('/partidosDelete/{id}', function () {
-    return view('partidos.partidosDelete');
-})->name('partidosDelete');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/player', [PlayerController::class,'index'])->name('player')->middleware('player');
+Route::get('/admin', [AdminController::class,'index'])->name('admin')->middleware('admin');

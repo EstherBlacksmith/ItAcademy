@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -32,10 +33,23 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+   /* public function register()
     {
-        $this->reportable(function (Throwable $e) {
+        $this->reportable(function (InvalidOrderException $e) {
+            dd($e);
             //
-        });
+        })->stop();
+    }*/
+
+    public function render ($request,Exception $e){
+
+        if ($this->isHttpException($e)){
+            $code = $e->getStatusCode();
+            if($code == '404'){
+                return response()->view('errors.customError');
+            }
+        }
+        return parent::render($request,$e);
     }
+    
 }

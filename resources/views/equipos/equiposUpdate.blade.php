@@ -4,12 +4,6 @@
 @section('title2','Edición de equipos')
 
 @section('content')
-<script>
-    $( document ).ready(function() {
-
-        $('#fecha').datepicker();
-    });
-</script>
 
 <div style="color: silver;">
   <h2 class="col-auto p-5 text-center" >Edición de equipos <i class="fas fa-trophy"></i></h2>
@@ -42,4 +36,4 @@
 	
 </div>
 
-@stop
+@endsection

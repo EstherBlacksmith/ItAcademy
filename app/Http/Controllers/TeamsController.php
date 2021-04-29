@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\Eloquent\Collection;
 use  App\Models\Team;
+use  App\Models\Matches;
+
 
 class TeamsController extends Controller
 {
@@ -26,7 +29,14 @@ class TeamsController extends Controller
             'ciudad'=>'required|max:100',
             'estadio'=>'required|max:255',
             'foundation_year'=>'required|date',
-        ]);
+        ],
+        $messages = [
+            'ciudad.required' => 'Es necesario indicar la ciudad del equipo',
+            'estadio.required' => 'Es necesario indicar el estadio',
+            'foundation_year.required' => 'Es necesario indicar la fecha de fundación',
+            
+        ],
+    );
     
         $equipo = Team::find($request->id);
 
@@ -52,7 +62,14 @@ class TeamsController extends Controller
             'ciudad'=>'required|max:100',
             'estadio'=>'required|max:255',
             'foundation_year'=>'required|date',
-        ]);
+        ],
+        $messages = [
+            'ciudad.required' => 'Es necesario indicar la ciudad del equipo',
+            'estadio.required' => 'Es necesario indicar el estadio',
+            'foundation_year.required' => 'Es necesario indicar la fecha de fundación',
+            
+        ],
+    );
     
         $equipo = new Team();
 
@@ -68,6 +85,12 @@ class TeamsController extends Controller
         $equipo = Team::find($id);
 
         if($equipo){
+
+            $matches = matches::whereIn('teams_id', array($equipo->id))->get();
+            foreach ($matches as $match ) {
+                $match->delete();
+            }
+
             $equipo->delete();    
         }
 

@@ -4,15 +4,9 @@
 @section('title2','Creación de equipos')
 
 @section('content')
-<script>
-    $( document ).ready(function() {
-
-        $('#fecha').datepicker();
-    });
-</script>
 
 <div style="color: silver;">
-  <h2 class="col-auto p-5 text-center" >Cración de equipos <i class="fas fa-trophy"></i></h2>
+  <h2 class="col-auto p-5 text-center" >Creación de equipos <i class="fas fa-trophy"></i></h2>
   <h5 class="text-center m5">Aquí puedes editar los datos de los equipos</h5>
 
 	<form method="post" action="{{route('equiposCreateStore')}}">
@@ -42,4 +36,4 @@
 	
 </div>
 
-@stop
+@endsection

@@ -14,7 +14,7 @@
       <tr style="color: green;" >
         <th scope="col"><strong>Equipo</strong></th>
         <th scope="col"><strong>Campo</strong></th>
-        <th scope="col"><strong>Fundación</strong></th>
+        <th scope="col" class="col-xs-2"><strong>Fundación</strong></th>
         <th scope="col" class="text-center"><strong>Editar</strong></th>
         <th scope="col" class="text-center"><strong>Eliminar</strong></th>
       </tr>
@@ -33,4 +33,4 @@
     </tbody>
   </table>
 </div>
-@stop
+@endsection

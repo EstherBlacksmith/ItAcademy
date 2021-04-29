@@ -37,13 +37,18 @@ class MatchesController extends Controller
     }
 
     public function partidosUpdateStore(Request $request){
-
         $validated =  $request->validate([
             'local_gol'=>'required',
             'visitor_gol'=>'required',
             'date'=>'required|date',
-            'id' => 'required',
-        ]);
+            'ciudad' => 'required',
+        ],
+   	    $messages = [
+		    'local_gol.required' => 'Es necesario indicar los goles locales',
+		    'visitor_gol.required' => 'Es necesario indicar los goles visitantes',
+		    'date.required' => 'Es necesario indicar la fecha del partido',
+		    'ciudad.required' => 'Es necesario indicar el estadio (Ciudad)',
+		],);
     
         $partido = matches::find($request->id);
 
@@ -52,7 +57,7 @@ class MatchesController extends Controller
             $partido->local_gol = $request->local_gol;
             $partido->visitor_gol = $request->visitor_gol;
             $partido->date = $request->date;
-            $partido->teams_id = $request->id;
+            $partido->teams_id = $request->ciudad;
             $partido->save();
         }
 
@@ -61,28 +66,37 @@ class MatchesController extends Controller
     }
 
     public function partidosCreate(){
-        return view('partidos.partidosCreate');
+    	$equipos = team::all();
+        return view('partidos.partidosCreate',compact('equipos'));
     }
  
     public function partidosCreateStore(Request $request){
-
         $validated =  $request->validate([
             'local_gol'=>'required',
             'visitor_gol'=>'required',
             'date'=>'required|date',
-        ]);
-    
+            'ciudad' => 'required',
+        ],
+	 	$messages = [
+		    'local_gol.required' => 'Es necesario indicar los goles locales',
+		    'visitor_gol.required' => 'Es necesario indicar los goles visitantes',
+		    'date.required' => 'Es necesario indicar la fecha del partido',
+		    'ciudad.required' => 'Es necesario indicar el estadio (Ciudad)',
+		],
+	);
         $partido = new matches();
 
-        $partido->stadium = $request->estadio;
-        $partido->city = $request->ciudad;
-        $partido->foundation_year = $request->foundation_year;
-        $partido->save();    
+
+        $partido->local_gol = $request->local_gol;
+        $partido->visitor_gol = $request->visitor_gol;
+        $partido->date = $request->date;
+        $partido->teams_id = $request->ciudad;
+        $partido->save();
 
         return($this->index());
 
     }
-    public function partidoosDelete($id){
+    public function partidosDelete($id){
         $partido = matches::find($id);
 
         if($partido){
