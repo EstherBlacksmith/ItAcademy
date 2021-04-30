@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Exceptions\InvalidOrderException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Throwable;
 
 
@@ -35,21 +38,18 @@ class Handler extends ExceptionHandler
      */
    /* public function register()
     {
-        $this->reportable(function (InvalidOrderException $e) {
-            dd($e);
-            //
-        })->stop();
+        $this->renderable(function (Throwable $e) {
+            $code = $e->getStatusCode();
+            if($code == 404) {
+                return response()->view('errors.error');
+            //    return redirect()->route('errors.error');
+                 // return redirect('errors.error');
+            }
+        });
     }*/
 
-    public function render ($request,Exception $e){
 
-        if ($this->isHttpException($e)){
-            $code = $e->getStatusCode();
-            if($code == '404'){
-                return response()->view('errors.customError');
-            }
-        }
-        return parent::render($request,$e);
-    }
+
+   
     
 }

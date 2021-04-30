@@ -45,19 +45,19 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav"> 
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Equipos
                 </a>
-               <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded" aria-labelledby="navbarDropdown"  data-bs-popper="none">
+               <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded"   data-bs-popper="none">
                   <li><a class="dropdown-item fw-bold link-success"  href="{{route('equiposIndex')}}">Mostrar</a></li>
                   <li><a class="dropdown-item fw-bold link-success"  href="{{route('equiposCreate')}}">Crear</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                  Partidos
                 </a>
-                <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded" aria-labelledby="navbarDropdown"  data-bs-popper="none">
+                <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded"   data-bs-popper="none">
                   <li><a class="dropdown-item fw-bold link-success" href="{{route('partidosIndex')}}">Mostrar</a></li>
                   <li><a class="dropdown-item fw-bold link-success" href="{{route('partidosCreate')}}">Crear</a></li>
                 </ul>
@@ -65,10 +65,10 @@
 
               @if (Route::has('login'))
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Login
                   </a>
-                  <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded" aria-labelledby="navbarDropdown"  data-bs-popper="none">
+                  <ul class="dropdown-menu  fw-bold shadow-lg p-3 mb-5 rounded"   data-bs-popper="none">
                     @auth                    
                       <li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" >
@@ -114,10 +114,9 @@
   </div>
 </body>
 
-<footer >
+<footer>
   <div class="mx-auto fixed-bottom bg-transparent" style="width: 500px; ">
-    <a href='https://www.freepik.es/vectores/fondo' class="text-dark">Vector de Fondo creado por macrovector - www.freepik.es</a></a>
-  </div>
+    <a href='https://www.freepik.es/vectores/fondo' class="text-dark">Vector de Fondo creado por macrovector - www.freepik.es</a>
 </footer>
 
 </html>

@@ -30,27 +30,27 @@ require __DIR__.'/auth.php';
 
 Route::get('/equiposIndex',[TeamsController::class,'index'])->name('equiposIndex');
 
-Route::get('/equiposCreate',[TeamsController::class,'equiposCreate'])->name('equiposCreate');
+Route::get('/equiposCreate',[TeamsController::class,'equiposCreate'])->name('equiposCreate')->middleware('admin');;
 
 Route::post('/equiposCreate',[TeamsController::class,'equiposCreateStore'])->name('equiposCreateStore')->middleware('admin');
 
-Route::get('/equiposUpdate/{id}',[TeamsController::class,'update'])->name('equiposUpdate');
+Route::get('/equiposUpdate/{id}',[TeamsController::class,'update'])->name('equiposUpdate')->middleware('admin');;
 
 Route::post('/equiposUpdate',[TeamsController::class,'equiposUpdateStore'])->name('equiposUpdateStore')->middleware('admin');
 
-Route::get('/equiposDelete/{id}', [TeamsController::class,'equiposDelete'])->name('equiposDelete');
+Route::get('/equiposDelete/{id}', [TeamsController::class,'equiposDelete'])->name('equiposDelete')->middleware('admin');;
 
 
 /* PARTIDOS */
 
 Route::get('/partidosIndex',[MatchesController::class,'index'])->name('partidosIndex');
 
-Route::get('/partidosCreate', [MatchesController::class,'partidosCreate'])->name('partidosCreate');
+Route::get('/partidosCreate', [MatchesController::class,'partidosCreate'])->name('partidosCreate')->middleware('admin');;
 
 Route::post('/partidosCreate', [MatchesController::class,'partidosCreateStore'])->name('partidosCreateStore')->middleware('admin');
 
 
-Route::get('/partidosUpdate/{id}', [MatchesController::class,'partidosUpdate'])->name('partidosUpdate');
+Route::get('/partidosUpdate/{id}', [MatchesController::class,'partidosUpdate'])->name('partidosUpdate')->middleware('admin');;
 
 Route::post('/partidosUpdate',[MatchesController::class,'partidosUpdateStore'])->name('partidosUpdateStore')->middleware('admin');
 
