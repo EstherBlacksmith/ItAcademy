@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Sabremos el rol del usuario ['admin', 'cliente'->esta es por defecto
+    public function esCliente()
+    {
+        return $this->rol === 'cliente';
+    }
 }

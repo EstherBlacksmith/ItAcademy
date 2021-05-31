@@ -1,5 +1,6 @@
+@extends('layouts.head')
+@include('layouts.body')
 
- @extends('layouts.head')
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
@@ -7,11 +8,12 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{asset('cool-admin-template/images/icon/logo.png')}}" alt="CoolAdmin">
+                                <img src="{{asset('image/Hand-Drawn-Fat-Cat-4.jpg')}}" alt="FatCat">
                             </a>
                         </div>
                         <div class="mb-4 text-sm text-gray-600">
-                            <p>¿Has olvidado la contraseña? No pasa nada. Déjano la dirección de email con la que te registraste, y nosotros te enviaremos un link para que elijas una nueva contraseña</p>
+                            <p>¿Has olvidado la contraseña? No pasa nada. Déjanos la dirección de email con la que te registraste, y los gatos gordos del hotel te enviarán un link para que elijas una nueva contraseña</p>
+                            <p>Son perezosos pero por tí lo harán rápido</p>
                         </div>
 <x-auth-session-status class="mb-4" :status="session('status')" />
 

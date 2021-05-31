@@ -15,10 +15,10 @@ class AddTimestampColumnsReservasAndHabitacionesTables extends Migration
     {
         Schema::table('habitaciones', function (Blueprint $table) {
                $table->timestamps();
-            });
+        });
         Schema::table('reservas', function (Blueprint $table) {
                $table->timestamps();
-            });
+        });
     }
 
     /**

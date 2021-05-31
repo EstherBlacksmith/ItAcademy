@@ -1,5 +1,5 @@
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
+        <aside class="menu-sidebar d-none d-lg-inline">
             <div class="logo">
                 <a href="{{route('home')}}">
                     <img  src="{{asset('image/Hand-Drawn-Fat-Cat-4.jpg')}}" alt="Cool Admin" />
@@ -18,9 +18,14 @@
                                     </li>
                                     <li>
                                         <a href="{{route('reservas')}}" style="color: darkolivegreen;">Reservas</a>
-                                    </li> 
+                                    </li>
+                                    <li> 
                                         <a href="{{route('habitaciones')}}" style="color: darkolivegreen;">Habitaciones</a>
-                                    </li>                               
+                                    </li>
+                                     <li> 
+                                        <a href="{{route('estructuraHotel')}}" style="color: darkolivegreen;">Estructura del Hotel</a>
+                                    </li>     
+                                                               
                                     
                                 </ul>
                         </li>                        
@@ -28,15 +33,29 @@
                             <a class="js-arrow" href="#" style="color: olive;">
                                 <i class="fas fa-copy" style="color: olive;"></i>Menú usuario</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
+                              
+                                    @if(Auth::check())
                                     <li>
-                                        <a href="{{route('login')}}" style="color: darkolivegreen;">Inicia sesión</a>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                         @csrf
+                                       <a href="#" style="color: darkolivegreen;"><button type="submit"> Cierra sesión </button></a>
+                                    </form>
+                                    </li>
+                                    @else
+                                      <li>
+                                        <a href="{{route('login')}}" style="color: darkolivegreen;">Inicia sesión</a>                                        
                                     </li>
                                     <li>
+                                        
                                         <a href="{{route('register')}}" style="color: darkolivegreen;">Regístrate</a>
+                                    </form>
                                     </li>
                                     <li>
                                         <a href="{{route('password.request')}}" style="color: darkolivegreen;">Contraseña olvidada</a>
                                     </li>
+                                    @endif
+
+                                    
                                 </ul>
                         </li>
                       

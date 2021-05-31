@@ -48,6 +48,10 @@
           color: #fff !important;
           text-decoration: none;
     }
+
+    .modal-backdrop {
+        z-index: 1;
+    }
     </style>
 
 </head>

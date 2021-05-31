@@ -1,0 +1,3 @@
+ @extends('layouts.head')
+<br>
+Woop! No tienes permisos para estar aquí. Mejor que no te vean...

@@ -1,4 +1,5 @@
 @extends('layouts.head')
+@include('layouts.header-desktop')
 @include('layouts.body')
 
 <div class="page-container">

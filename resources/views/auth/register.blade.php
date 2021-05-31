@@ -1,4 +1,5 @@
- @extends('layouts.head')
+@extends('layouts.head')
+@include('layouts.body')
 
  <div class="page-wrapper">
         <div class="page-content--bge5">
@@ -7,7 +8,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{asset('cool-admin-template/images/icon/logo.png')}}" alt="CoolAdmin">
+                                <img src="{{asset('image/Hand-Drawn-Fat-Cat-4.jpg')}}" alt="CoolAdmin">
                             </a>
                         </div>
                         <div class="login-form">
@@ -15,7 +16,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Nombre de usuario</label>
-                                    <input class="au-input au-input--full" type="text" name="username" :value="old('name')" placeholder="Nombre de usuario">
+                                    <input class="au-input au-input--full" type="text" name="name" :value="old('name')" placeholder="Nombre de usuario">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
@@ -29,19 +30,15 @@
                                     <label>Confirmar contraseña</label>
                                     <input class="au-input au-input--full" type="password" name="password_confirmation" placeholder="Contraseña">
                                 </div>
-                                <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="aggree">He leido y estoy de acuerdo con la política de términos y condiciones
-                                    </label>
-                                </div>
+                                
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Regístrate</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Regístrate con facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">Regístrate con twitter</button>
-                                    </div>
-                                </div>
+                               
                             </form>
+                            @if($errors)
+                               @foreach ($errors->all() as $error)
+                                  <div class="alert alert-danger">{{ $error }}</div>
+                              @endforeach
+                            @endif
                             <div class="register-link">
                                 <p>
                                     ¿Ya tienes una cuenta?
