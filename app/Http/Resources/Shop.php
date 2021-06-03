@@ -22,4 +22,8 @@ class Shop extends JsonResource
             'updated_at' => $this->updated_at->format('d/m/Y'),
         ];
     }
+
+    public function collars(){
+        return $this->hasMany(Collar::class);
+    }  
 }

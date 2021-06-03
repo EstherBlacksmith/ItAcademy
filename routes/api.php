@@ -21,10 +21,12 @@ use App\Http\Controllers\API\ShopController;
     return $request->user();
 });*/
 
-
+Route::get('register',[RegisterController::class, 'registerView']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
      
+
 Route::middleware('auth:api')->group( function () {
     Route::resource('shops', ShopController::class);
+    Route::resource('collars', CollarController::class);
 });
