@@ -9,7 +9,16 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
    
 class RegisterController extends BaseController
-{
+{   /**
+    * Register registerView
+    *
+    * @return registerView
+    */
+
+    public function registerView(){
+        return view('auth/register');
+    }
+    
     /**
      * Register api
      *
@@ -36,7 +45,17 @@ class RegisterController extends BaseController
    
         return $this->sendResponse($success, 'User register successfully.');
     }
-   
+
+    /**
+    * Register loginView
+    *
+    * @return loginView
+    */
+
+    public function loginView(){
+        return view('auth/login');
+    }
+    
     /**
      * Login api
      *

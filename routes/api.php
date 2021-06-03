@@ -23,6 +23,8 @@ use App\Http\Controllers\API\ShopController;
 
 Route::get('register',[RegisterController::class, 'registerView']);
 Route::post('register', [RegisterController::class, 'register']);
+
+Route::get('login',[RegisterController::class, 'loginView']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
      
 
