@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '27d32e06555d55fe1603a61e033c59f5e8ca7d63',
+    'reference' => 'e46802dee5efc2cbf43dbf4bef88a3ba66009501',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -478,7 +478,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '27d32e06555d55fe1603a61e033c59f5e8ca7d63',
+      'reference' => 'e46802dee5efc2cbf43dbf4bef88a3ba66009501',
     ),
     'laravel/passport' => 
     array (
@@ -1121,6 +1121,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'spatie/laravel-permission' => 
+    array (
+      'pretty_version' => '4.1.0',
+      'version' => '4.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4a89dd3f083ddb89153367e6d087de3872c724ff',
     ),
     'swiftmailer/swiftmailer' => 
     array (

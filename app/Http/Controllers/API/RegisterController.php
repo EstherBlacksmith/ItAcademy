@@ -7,6 +7,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
    
 class RegisterController extends BaseController
 {   /**
@@ -41,8 +43,11 @@ class RegisterController extends BaseController
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
-   
+        $success['name'] =  $user->name;   
+
+        $user->assignRole('worker','owner');
+        $user->save(); 
+
         return $this->sendResponse($success, 'User register successfully.');
     }
 
@@ -55,7 +60,7 @@ class RegisterController extends BaseController
     public function loginView(){
         return view('auth/login');
     }
-    
+
     /**
      * Login api
      *
@@ -73,5 +78,30 @@ class RegisterController extends BaseController
         else{ 
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
+    }
+
+    public function roles(){
+        
+        /* Spatie
+        *
+        */    
+        //create roles
+        $owner = Role::create(['name' => 'owner']);
+        $worker = Role::create(['name' => 'worker']);
+        
+
+        // create permissions
+        $createShop = Permission::create(['name' => 'create shops']);
+        $updateShop = Permission::create(['name' => 'update shops']);
+        $deleteShop = Permission::create(['name' => 'delete shops']);
+
+        $createCollar = Permission::create(['name' => 'create collars']);
+        $updateCollar = Permission::create(['name' => 'update collars']);
+        $deleteCollar = Permission::create(['name' => 'delete collars']);
+
+        // assign permissions to the role
+        $owner->givePermissionTo([$createShop,$updateShop,$deleteShop,$createCollar,$updateCollar,$deleteCollar]);
+        $worker->givePermissionTo([$createCollar,$updateCollar,$deleteCollar]);
+
     }
 }

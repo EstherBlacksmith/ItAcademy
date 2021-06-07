@@ -62,12 +62,37 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
+    protected function create(array $data){
+   
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole('worker','owner');
+        $user->save();        
+        return $user;
     }
+
+    public function roles(){
+        
+        /* Spatie
+        *
+        */
+        // create permissions
+        Permission::create(['name' => 'create shops']);
+        Permission::create(['name' => 'edit shops']);
+        Permission::create(['name' => 'delete shops']);
+        Permission::create(['name' => 'update shops']);
+    
+        Permission::create(['name' => 'create collars']);
+        Permission::create(['name' => 'edit collars']);
+        Permission::create(['name' => 'delete collars']);
+        Permission::create(['name' => 'update collars']);
+    
+        //create roles
+        Role::create(['name' => 'owner']);
+        Role::create(['name' => 'worker']);
+        }
+    
 }

@@ -19,8 +19,16 @@ class CollarController extends BaseController
     {
         $collars = Collar::all();
     
-        return $this->sendResponse(CollarController::collection($collars), 'Collars retrieved successfully.');
+        return view('collar/index', compact('collars'));
+
+        //return $this->sendResponse(CollarController::collection($collars), 'Collars retrieved successfully.');
     }
+    
+    public function create()
+    {
+        return view('collars/create',);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -85,6 +93,7 @@ class CollarController extends BaseController
         }
    
         $collar->name = $input['name'];
+        $collar->author = $input['author'];
         $collar->capacity = $input['capacity'];
         $collar->save();
    

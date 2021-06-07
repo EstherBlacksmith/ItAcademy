@@ -19,8 +19,15 @@ class ShopController extends BaseController
     {
         $shops = Shop::all();
     
-        return $this->sendResponse(ShopResource::collection($shops), 'Shops retrieved successfully.');
+        return view('shops/index', compact('shops'));
+      //  return $this->sendResponse(ShopResource::collection($shops), 'Shops retrieved successfully.');
     }
+
+    public function create()
+    {
+        return view('shops/create',);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -95,7 +102,7 @@ class ShopController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function delete(Shop $shop)
     {
         $shop->delete();
    
