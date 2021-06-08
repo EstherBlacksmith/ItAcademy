@@ -20,12 +20,10 @@ class Collar extends JsonResource
             'name' => $this->name,
             'author' => $this->author,
             'date' => $this->date,
+            'shop_id'=> $this->shop_id,
             'created_at' => $this->created_at->format('d/m/Y'),
             'updated_at' => $this->updated_at->format('d/m/Y'),
         ];
     }
-
-    public function shops(){
-        return $this->belongsTo(Shop::class);
-    }  
+     
 }

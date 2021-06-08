@@ -41,6 +41,8 @@ Route::group(['middleware' => ['role:owner']], function () {
 
     Route::post('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 
+    Route::get('burnCollars/{shop}',[CollarController::class,'burnCollars'])->name('burnCollars');
+
 });
 
 Route::group(['middleware' => ['role:worker']], function () {

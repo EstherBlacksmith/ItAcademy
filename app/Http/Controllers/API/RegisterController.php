@@ -45,6 +45,8 @@ class RegisterController extends BaseController
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;   
 
+        $this->role();
+
         $user->assignRole('worker','owner');
         $user->save(); 
 
@@ -89,6 +91,7 @@ class RegisterController extends BaseController
         $owner = Role::create(['name' => 'owner']);
         $worker = Role::create(['name' => 'worker']);
         
+        dd('lega');
 
         // create permissions
         $createShop = Permission::create(['name' => 'create shops']);
@@ -102,6 +105,6 @@ class RegisterController extends BaseController
         // assign permissions to the role
         $owner->givePermissionTo([$createShop,$updateShop,$deleteShop,$createCollar,$updateCollar,$deleteCollar]);
         $worker->givePermissionTo([$createCollar,$updateCollar,$deleteCollar]);
-
+       
     }
 }

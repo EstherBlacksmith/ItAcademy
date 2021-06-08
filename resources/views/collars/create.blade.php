@@ -5,6 +5,13 @@
     <form action="{{ route('storeCollar')}}" method="post">
     @csrf
         <div class="form-group">
+        <select name="shop_id">
+            @foreach($shops as $shop)
+            <option  value="{{ $shop->id }}">{{$shop->name}}</option>
+            @endforeach
+        </select>
+        </div>
+        <div class="form-group">
             <label for="name">Collar name</label>
             <input type="text" class="form-control" id="name" aria-describedby="name" name="name"
                 value="{{ old('name') }}">

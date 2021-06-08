@@ -14,6 +14,9 @@ class User extends Authenticatable
 {
     use HasRoles, HasApiTokens, HasFactory, Notifiable;
 
+    //Spatie issue
+    protected $guard_name = 'api';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -43,11 +46,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
-
-
-
 
    
 }

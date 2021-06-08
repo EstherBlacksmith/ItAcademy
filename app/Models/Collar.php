@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Shop;
 
 class Collar extends Model
 {
@@ -18,6 +19,11 @@ class Collar extends Model
         'name',
         'author',
         'date',
+        'shop_id'
     ];
+
+    public function shops(){
+        return $this->belongsTo(Shop::class,'shop_id','id');
+    } 
 
 }

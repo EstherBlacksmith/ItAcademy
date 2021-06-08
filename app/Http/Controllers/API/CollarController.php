@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Collar;
+use App\Models\Shop;
 use Validator;
 use App\Http\Resources\Collar as CollarResource;
+use Redirect;
    
 class CollarController extends BaseController
 {
@@ -19,14 +21,14 @@ class CollarController extends BaseController
     {
         $collars = Collar::all();
     
-        return view('collar/index', compact('collars'));
+        return view('collars/index', compact('collars'));
 
         //return $this->sendResponse(CollarController::collection($collars), 'Collars retrieved successfully.');
     }
     
     public function create()
-    {
-        return view('collars/create',);
+    {   $shops = Shop::all();
+        return view('collars/create',compact('shops'));
     }
 
     /**
@@ -43,6 +45,7 @@ class CollarController extends BaseController
             'name' => 'required',
             'author' => 'required',
             'date' => 'required',
+            'shop_id' => 'required'
         ]);
    
         if($validator->fails()){
@@ -108,8 +111,28 @@ class CollarController extends BaseController
      */
     public function destroy(Collar $collar)
     {
-        $collar->delete();
+        try {
+            $collar->delete();
+        } catch (\Throwable $th) {
+            echo $th;        }
    
-        return $this->sendResponse([], 'Collar deleted successfully.');
+        return Redirect::back();
+    }
+
+    //Burn all the content from one shop
+    public function burnCollars (Shop $shop){
+  
+        $collars = $shop->collars->all();
+        foreach($collars as $collar){
+            try {
+                $this->destroy($collar);
+            } catch (\Throwable $th) {
+               echo $th;
+               return Redirect::back()->with('errors','The necklaces could not be burned.');
+
+            }
+        }
+        return Redirect::back()->with('success','All the necklaces have been burned.');
+
     }
 }

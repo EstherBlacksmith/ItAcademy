@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Collar;
 
 class Shop extends Model
 {
@@ -18,5 +19,9 @@ class Shop extends Model
         'name',
         'capacity',
     ];
+
+    public function collars(){
+        return $this->hasMany(Collar::class,'shop_id','id');
+    } 
 
 }
