@@ -5,6 +5,7 @@
     <form action="{{ route('storeCollar')}}" method="post">
     @csrf
         <div class="form-group">
+        <label for="shop_id">Shop</label>
         <select name="shop_id">
             @foreach($shops as $shop)
             <option  value="{{ $shop->id }}">{{$shop->name}}</option>
@@ -29,4 +30,6 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+
 </div>

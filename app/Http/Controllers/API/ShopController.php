@@ -7,6 +7,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Shop;
 use Validator;
 use App\Http\Resources\Shop as ShopResource;
+use Redirect;
    
 class ShopController extends BaseController
 {
@@ -20,13 +21,13 @@ class ShopController extends BaseController
         $shops = Shop::all();
     
         return view('shops/index', compact('shops'));
-      //  return $this->sendResponse(ShopResource::collection($shops), 'Shops retrieved successfully.');
     }
 
     public function create()
     {
-        return view('shops/create',);
+        return view('shops/create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -44,12 +45,12 @@ class ShopController extends BaseController
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return Redirect::back()->with('errors', $validator->errors());
         }
    
         $shop = Shop::create($input);
-   
-        return $this->sendResponse(new ShopResource($shop), 'Shop created successfully.');
+        
+        return Redirect::back()->with('success','Shop created successfully.');
     } 
    
     /**
@@ -63,12 +64,18 @@ class ShopController extends BaseController
         $shop = Shop::find($id);
   
         if (is_null($shop)) {
-            return $this->sendError('Shop not found.');
+            return Redirect::back()->with('errors','Shop not found.');
         }
-   
-        return $this->sendResponse(new ShopResource($shop), 'Shop retrieved successfully.');
+       
+        return Redirect::back()->with('success','Shop retrieved successfully.');
+
     }
     
+    public function updateView(Shop $shop)
+    {
+        return view('shops/update', compact('shop'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -76,7 +83,7 @@ class ShopController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(Request $request)
     {
         $input = $request->all();
    
@@ -86,14 +93,19 @@ class ShopController extends BaseController
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return Redirect::back()->with('errors', $validator->errors());
         }
-   
+        
+        $collars = $shop->collars->all();
+        if($input['capacity'] < count($collars)){
+            return Redirect::back()->with('errors','The amount of necklaces stored is greater than the new capacity of the shop');
+        }
+        
         $shop->name = $input['name'];
         $shop->capacity = $input['capacity'];
         $shop->save();
-   
-        return $this->sendResponse(new ShopResource($shop), 'Shop updated successfully.');
+
+        return Redirect::back()->with('success','Shop updated successfully.');
     }
    
     /**
@@ -105,7 +117,6 @@ class ShopController extends BaseController
     public function delete(Shop $shop)
     {
         $shop->delete();
-   
-        return $this->sendResponse([], 'Shop deleted successfully.');
+        return Redirect::back()->with('success','Shop deleted successfully.');
     }
 }

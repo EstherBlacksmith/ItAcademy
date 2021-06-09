@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="//code.jquery.com/jquery.min.js"></script> 
+<script src="jquery.tabledit.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -87,9 +89,24 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+       
     </div>
+    <div class="container" >
+                <div class="row">
+                @yield('content')
+                
+                @if(session('success'))
+                    <div class="alert alert-light" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('errors'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('errors') }}
+                    </div>
+                @endif
+            </div>
+       
 </body>
 </html>

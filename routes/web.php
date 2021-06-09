@@ -28,18 +28,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('shops',[ShopController::class,'index'])->name('shops');
 
 
-
-
-
 Route::group(['middleware' => ['role:owner']], function () {
     //create, delete, update shops
     Route::get('createShops',[ShopController::class,'create'])->name('createShops');
     Route::post('createShops',[ShopController::class,'store'])->name('storeShop');
 
-    Route::get('updateShop',[ShopController::class,'update'])->name('updateShop');
+    Route::get('updateShop',[ShopController::class,'updateView'])->name('updateShop');
     Route::post('updateShop',[ShopController::class,'update']);
 
-    Route::post('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
+    Route::get('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 
     Route::get('burnCollars/{shop}',[CollarController::class,'burnCollars'])->name('burnCollars');
 
@@ -51,8 +48,8 @@ Route::group(['middleware' => ['role:worker']], function () {
     Route::get('createCollars',[CollarController::class,'create'])->name('createCollars');
     Route::post('createCollars',[CollarController::class,'store'])->name('storeCollar');
 
-    Route::get('updateCollar',[CollarController::class,'update'])->name('updateCollar');
-    Route::post('updateCollar',[CollarController::class,'update']);
+    Route::get('updateCollar/{collar}',[CollarController::class,'updateView'])->name('updateCollar');
+    Route::post('updateCollar/{collar}',[CollarController::class,'update']);
 
     Route::post('deleteCollar/{shop}',[CollarController::class,'delete'])->name('deleteCollar');
 

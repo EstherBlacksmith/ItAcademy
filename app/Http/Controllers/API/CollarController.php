@@ -22,8 +22,6 @@ class CollarController extends BaseController
         $collars = Collar::all();
     
         return view('collars/index', compact('collars'));
-
-        //return $this->sendResponse(CollarController::collection($collars), 'Collars retrieved successfully.');
     }
     
     public function create()
@@ -49,12 +47,24 @@ class CollarController extends BaseController
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return Redirect::back()->with('errors', $validator->errors());
+
         }
    
-        $collar = Collar::create($input);
-   
-        return $this->sendResponse(new CollarController($collar), 'Collar created successfully.');
+        //max items alowed
+        $shop = Shop::find($input['shop_id']);
+        $count = count( $shop->collars->all());
+
+        if ($count < $shop->capacity){
+
+            $collar = Collar::create($input);
+
+            return Redirect::back()->with('success','Collar created successfully.');
+        }else{
+            return Redirect::back()->with('errors','The shop is full.');
+            
+        }
+
     } 
    
     /**
@@ -68,12 +78,18 @@ class CollarController extends BaseController
         $collar = Collar::find($id);
   
         if (is_null($collar)) {
-            return $this->sendError('Collar not found.');
+            return Redirect::back()->with('errors','Collar not found.');
+
         }
-   
-        return $this->sendResponse(new CollarController($collar), 'Collar retrieved successfully.');
+
+        return Redirect::back()->with('success','Collar retrieved successfully.');
     }
-    
+      
+    public function updateView(Collar $collar)
+    {
+        return view('collars/update', compact('collar'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -92,15 +108,16 @@ class CollarController extends BaseController
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return Redirect::back()->with('errors',$validator->errors());
         }
    
         $collar->name = $input['name'];
         $collar->author = $input['author'];
         $collar->capacity = $input['capacity'];
         $collar->save();
-   
-        return $this->sendResponse(new CollarController($collar), 'Collar updated successfully.');
+
+        return Redirect::back()->with('success','Collar updated successfully.');
+
     }
    
     /**
@@ -114,9 +131,10 @@ class CollarController extends BaseController
         try {
             $collar->delete();
         } catch (\Throwable $th) {
-            echo $th;        }
+            return Redirect::back()->with('errors','The necklaces could not be burned.');
+        }
    
-        return Redirect::back();
+        return Redirect::back()->with('success','The necklaces have been burned.');
     }
 
     //Burn all the content from one shop

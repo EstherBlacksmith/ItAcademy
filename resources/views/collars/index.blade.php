@@ -22,7 +22,7 @@
                     <td>{{ $collar->shops->name}}</td>
                    
                     <td>{{ $collar->date}}</td>
-                    <td><a href="{{ route('updateCollar') }}"> <img
+                    <td><a href="{{ route('updateCollar',$collar) }}"> <img
                                 src="{{ asset('gamer-icons/swiss-army-knife.png') }}" width="30"
                                 height="30"></img></a></td>
                     <td><a href="{{ route('deleteCollar',$collar) }}"><img
@@ -33,4 +33,5 @@
 
         </tbody>
     </table>
+
 </div>
