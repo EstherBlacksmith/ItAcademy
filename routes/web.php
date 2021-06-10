@@ -33,8 +33,8 @@ Route::group(['middleware' => ['role:owner']], function () {
     Route::get('createShops',[ShopController::class,'create'])->name('createShops');
     Route::post('createShops',[ShopController::class,'store'])->name('storeShop');
 
-    Route::get('updateShop',[ShopController::class,'updateView'])->name('updateShop');
-    Route::post('updateShop',[ShopController::class,'update']);
+    Route::get('updateShop',[ShopController::class,'updateView']);
+    Route::post('updateShop',[ShopController::class,'update'])->name('updateShop');
 
     Route::get('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 

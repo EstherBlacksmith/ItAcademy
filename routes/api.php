@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ShopController;
+use App\Http\Controllers\API\CollarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('login',[RegisterController::class, 'loginView']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
-     
+
 
 Route::middleware('auth:api')->group( function () {
     Route::resource('shops', ShopController::class);
