@@ -3,7 +3,7 @@
 <script type="text/javascript">
 
 /*
-* Modificamos los ejercicios mediante una tabla editable y llamada ajax
+* Mofify the shops by editying a table and an axios call
 */
 
 
@@ -22,11 +22,51 @@ function getSample() {
         });
 }
 
+/*function postSample(){
+    axios.post("{{ route('StoreUpdateShop')}} ", {
+        data: {
+                name: 'Finn',
+                capacity: 'Williams'
+            }
+        })
+        .then((response) => {
+        console.log(response);
+        }, (error) => {
+        console.log(error);
+    });
+}*/
+
 function getCellValue(element, id, tipo) {
     var elementValue = element.getElementsByTagName('input')[0].value;
 
-    jQuery.ajax({
-       url: "{{ route('updateShop')}} ",
+    axios.defaults.headers.common = {
+        Authorization: "Bearer " + localStorage.getItem("token")
+    };
+
+    axios.post('/StoreUpdateShop', {
+        _method: 'POST',
+        name: elementValue,
+       })
+    
+    
+    .then(
+       (res) => {
+        console.log('Axios:',res);
+        console.log('Axios data:',res.data);
+    }).catch((err) => { console.log('Axios Error:', err); }
+    /*.then((response) => {
+        console.log(response);
+    }, (error) => {
+        console.log(error);
+    }*/
+
+
+    );
+
+
+
+    /*jQuery.ajax({
+       url: "{{ route('StoreUpdateShop')}} ",
        method: 'post',
        data: {
           "_token": $("meta[name='csrf-token']").attr("content"),
@@ -39,7 +79,7 @@ function getCellValue(element, id, tipo) {
        element.getElementsByTagName('span')[0].value = elementValue ;
 
     }});
-
+*/
   }
 
   $(document).ready(function(){

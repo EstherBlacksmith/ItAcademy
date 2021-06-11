@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\API\ShopController;
 use App\Http\Controllers\API\CollarController;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ Route::group(['middleware' => ['role:owner']], function () {
     Route::post('createShops',[ShopController::class,'store'])->name('storeShop');
 
     Route::get('updateShop',[ShopController::class,'updateView']);
-    Route::post('updateShop',[ShopController::class,'update'])->name('updateShop');
+    Route::post('StoreUpdateShop',[ShopController::class,'update'])->name('StoreUpdateShop');
 
     Route::get('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 

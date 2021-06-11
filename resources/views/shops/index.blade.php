@@ -1,6 +1,5 @@
 @include('layouts.app')
 @include('scriptEditTable')
-
 <h3>Shops</h3>
 <div class="col col-8">
     <table class="table table-striped" id="shopsEdition">
@@ -31,12 +30,10 @@
                         <input class="tabledit-input form-control input-sm" type="text" id="capacity_{{ $shop->id }}"
                             name="capacity" value="{{ $shop->capacity }}" style="display: none;" disabled=""></td>
 
-                    <td><a href="{{ route('updateShop') }}"> <img
-                                src="{{ asset('gamer-icons/swiss-army-knife.png') }}" width="30"
-                                height="30"></img></a></td>
+
                     <td><a href="{{ route('deleteShop',$shop) }}"><img
                                 src="{{ asset('gamer-icons/broom.png') }}" width="30"
-                                height="30"></img></a>
+                                height="30"/></a>
                     </td>
                     <td>
                         @if(count($shop->collars))
@@ -52,7 +49,7 @@
                     </td>
                     <td><a href="{{ route('burnCollars',$shop) }}"><img
                                 src="{{ asset('gamer-icons/burning-book.png') }}" width="30"
-                                height="30"></img></a>
+                                height="30"/></a>
                     </td>
                 </tr>
             @endforeach

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Shop;
-use App\Models\Collar;
-use Validator;
-use App\Http\Resources\Shop as ShopResource;
-use Redirect;
+//use App\Models\Collar;
+//use App\Http\Resources\Shop as ShopResource;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class ShopController extends BaseController
 {
@@ -84,8 +84,9 @@ class ShopController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request){
+
+        dd($request);
         $input = $request->all();
 
         $validator = Validator::make($input, [
