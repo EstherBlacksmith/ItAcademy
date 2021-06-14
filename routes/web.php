@@ -27,8 +27,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('shops',[ShopController::class,'index'])->name('shops');
 
-
-Route::group(['middleware' => ['role:owner']], function () {
+Route::group(['middleware' => ['auth:api', 'role:owner']], function () {
     //create, delete, update shops
     Route::get('createShops',[ShopController::class,'create'])->name('createShops');
     Route::post('createShops',[ShopController::class,'store'])->name('storeShop');
@@ -39,11 +38,10 @@ Route::group(['middleware' => ['role:owner']], function () {
     Route::get('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 
     Route::get('burnCollars/{shop}',[CollarController::class,'burnCollars'])->name('burnCollars');
-
 });
 
-Route::group(['middleware' => ['role:worker']], function () {
-    //create, delete, update colalrs
+Route::group(['middleware' => ['auth:api','role:worker']], function () {
+    //create, delete, update collars
     Route::get('collars',[CollarController::class,'index'])->name('collars');
     Route::get('createCollars',[CollarController::class,'create'])->name('createCollars');
     Route::post('createCollars',[CollarController::class,'store'])->name('storeCollar');
@@ -52,6 +50,5 @@ Route::group(['middleware' => ['role:worker']], function () {
     Route::post('updateCollar/{collar}',[CollarController::class,'update']);
 
     Route::post('deleteCollar/{shop}',[CollarController::class,'delete'])->name('deleteCollar');
-
-
 });
+

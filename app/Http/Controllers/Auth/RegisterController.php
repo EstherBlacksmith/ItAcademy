@@ -70,6 +70,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole('worker');
+        if ($user->name == 'admin' && $user->email == 'admin@admin.com'){
+            $user->assignRole('owner');
+        }
         $user->save();        
         return $user;
     }
@@ -93,6 +96,6 @@ class RegisterController extends Controller
         //create roles
         Role::create(['name' => 'owner']);
         Role::create(['name' => 'worker']);
-        }
+    }
     
 }
