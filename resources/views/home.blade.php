@@ -14,6 +14,7 @@
         <div class="row justify-content-center">
             <div class="col col-2">
                 <div class="card" style="max-width:: 18rem;">
+                <img src="{{ asset('images/pinturas_con_gato_13.jpg') }}" />
                     <div class="card-body">
                         @if(session('status'))
                             <div class="alert alert-success" role="alert">

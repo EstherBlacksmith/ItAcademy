@@ -41,9 +41,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('shops') }}">{{ __('Shops') }}</a>
                         </li>
+                        @hasrole('owner')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('createShops') }}">{{ __('Create shops') }}</a>
-                        </li>
+                        </li>                        
+                        @endhasrole                 
+                    
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('collars') }}">{{ __('Collars') }}</a>
                         </li>

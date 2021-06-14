@@ -42,44 +42,39 @@ function getCellValue(element, id, tipo) {
     axios.defaults.headers.common = {
         Authorization: "Bearer " + localStorage.getItem("token")
     };
-
+ 
+/*
     axios.post('/StoreUpdateShop', {
         _method: 'POST',
         name: elementValue,
        })
-    
     
     .then(
        (res) => {
         console.log('Axios:',res);
         console.log('Axios data:',res.data);
     }).catch((err) => { console.log('Axios Error:', err); }
-    /*.then((response) => {
-        console.log(response);
-    }, (error) => {
-        console.log(error);
-    }*/
+   
 
 
-    );
+    );*/
 
 
-
-    /*jQuery.ajax({
+alert( elementValue);
+    jQuery.ajax({
        url: "{{ route('StoreUpdateShop')}} ",
        method: 'post',
        data: {
-          "_token": $("meta[name='csrf-token']").attr("content"),
+        "_token": "{{ csrf_token() }}",
           elemento: tipo,
           valor: elementValue,
           id: id
        },
        success: function(result){
+            element.getElementsByTagName('span')[0].value = elementValue ;
+        }
+    });
 
-       element.getElementsByTagName('span')[0].value = elementValue ;
-
-    }});
-*/
   }
 
   $(document).ready(function(){
