@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:api','role:owner']], function () {
     Route::post('createShops',[ShopController::class,'store'])->name('storeShop');
 
     Route::get('updateShop',[ShopController::class,'updateView']);
-    Route::post('StoreUpdateShop',[ShopController::class,'update'])->name('StoreUpdateShop');
+    Route::put('StoreUpdateShop',[ShopController::class,'update'])->name('StoreUpdateShop');
 
     Route::get('deleteShop/{shop}',[ShopController::class,'delete'])->name('deleteShop');
 

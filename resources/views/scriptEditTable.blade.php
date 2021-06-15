@@ -3,79 +3,50 @@
 <script type="text/javascript">
 
 /*
-* Mofify the shops by editying a table and an axios call
+* Mofify the shops by editying a table and an ajax call
 */
+//get the personal acces token
 
-
-function getSample() {
-    var config = {
-        headers: {
-            '_token': $("meta[name='csrf-token']").attr("content")
-        }
-    };
-    window.axios.get('/shops', config)
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((e) => {
-            console.log(e);
-        });
-}
-
-/*function postSample(){
-    axios.post("{{ route('StoreUpdateShop')}} ", {
-        data: {
-                name: 'Finn',
-                capacity: 'Williams'
-            }
-        })
-        .then((response) => {
-        console.log(response);
-        }, (error) => {
-        console.log(error);
-    });
-}*/
 
 function getCellValue(element, id, tipo) {
     var elementValue = element.getElementsByTagName('input')[0].value;
-
-    axios.defaults.headers.common = {
-        Authorization: "Bearer " + localStorage.getItem("token")
-    };
- 
 /*
-    axios.post('/StoreUpdateShop', {
-        _method: 'POST',
-        name: elementValue,
-       })
-    
-    .then(
-       (res) => {
-        console.log('Axios:',res);
-        console.log('Axios data:',res.data);
-    }).catch((err) => { console.log('Axios Error:', err); }
-   
-
-
-    );*/
-
-
-alert( elementValue);
-    jQuery.ajax({
+    $.ajax({
        url: "{{ route('StoreUpdateShop')}} ",
+       
+       headers: {'Authorization': localStorage.getItem('token') },
        method: 'post',
        data: {
-        "_token": "{{ csrf_token() }}",
+        "_token": $("meta[name='csrf-token']").attr("content"),
           elemento: tipo,
           valor: elementValue,
           id: id
        },
-       success: function(result){
+       success: function(data){           
             element.getElementsByTagName('span')[0].value = elementValue ;
-        }
-    });
+       }
+       
+    });*/
 
-  }
+    const data = {
+        elemento: tipo,
+        valor: elementValue,
+        id: id
+
+    };    
+
+    axios.defaults.headers.common = {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    };
+
+    axios.put( "{{ route('StoreUpdateShop')}} ", data)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch (response => {
+                // List errors on response...
+            });
+    }  
 
   $(document).ready(function(){
       var x = $('#shopsEdition');

@@ -58,11 +58,11 @@ class RegisterController extends BaseController
     *
     * @return loginView
     */
-
-    public function loginView(){
+/*
+    public function loginView(){        
         return view('auth/login');
     }
-
+*/
     /**
      * Login api
      *

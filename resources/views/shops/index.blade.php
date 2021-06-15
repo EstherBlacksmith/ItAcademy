@@ -1,5 +1,7 @@
 @include('layouts.app')
 @include('scriptEditTable')
+
+
 <h3>Shops</h3>
 <div class="col col-8">
     <table class="table table-striped" id="shopsEdition">

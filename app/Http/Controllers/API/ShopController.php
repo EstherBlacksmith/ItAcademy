@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Shop;
@@ -21,7 +22,22 @@ class ShopController extends BaseController
     {
         $shops = Shop::all();
 
-        return view('shops/index', compact('shops'));
+        if (Auth::check()) {
+            $token = auth()->user()->createToken('Personal Access Token')->accessToken;
+
+            return view('shops/index', compact('shops','token'));
+
+           // return response()->json(['token' => $token], 200);
+        } else {
+           
+            return view('shops/index', compact('shops'));
+
+            // abort(404);
+           // return response(['error' => 'Unauthorized']);
+            //return response()->json(['error' => 'Unauthorized'], 401);
+        }  
+
+    //   return view('shops/index', compact('shops'));
     }
 
     public function create()
@@ -84,30 +100,47 @@ class ShopController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request){
-
-        dd($request);
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'capacity' => 'required'
-        ]);
-
-        if($validator->fails()){
-            return Redirect::back()->with('errors', $validator->errors());
+    public function update(Request $request){      
+/*
+        if ($request->elemento == "capacity"){   
+                
+            $validator = Validator::make($request->capacity, [
+                'capacity' => 'required',
+            ]);
         }
 
-        // $collars = Shop::collars()->all();
-        // if($input['capacity'] < count($collars)){
-        //     return Redirect::back()->with('errors','The amount of necklaces stored is greater than the new capacity of the shop');
-        // }
+        if ($request->elemento == "name"){     
+    
+            $validator = Validator::make($request->name, [
+                'name' => 'required',
+            ]);
+        }
+*/
+        $validated = $request->validate([
+            'capacity' => 'numeric',
+            'valor' => 'required'
+        ]);
+       
 
-        // $shop->name = $input['name'];
-        // $shop->capacity = $input['capacity'];
-        // $shop->save();
+        if($validated->fails()){
+            return response()->json(['Errors',404]);
+        }
+        
+        $collars = Shop::collars()->all();
+        
+        if($input['capacity'] < count($collars)){
+             return Redirect::back()->with('errors','The amount of necklaces stored is greater than the new capacity of the shop');
+        }
 
-        return Redirect::back()->with('success','Shop updated successfully.');
+         if ($request->elemento == "capacity"){
+            $shop->capacity = $request->valor;
+         }else{
+            $shop->name = $request->valor;
+         }
+
+         $shop->save();
+         
+        return response()->json(['success','Shop updated successfully']);
     }
 
     /**

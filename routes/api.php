@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\PassportController;
 use App\Http\Controllers\API\ShopController;
 use App\Http\Controllers\API\CollarController;
 
@@ -25,8 +26,9 @@ use App\Http\Controllers\API\CollarController;
 Route::get('register',[RegisterController::class, 'registerView']);
 Route::post('register', [RegisterController::class, 'register']);
 
-Route::get('login',[RegisterController::class, 'loginView']);
-Route::post('login', [RegisterController::class, 'login'])->name('login');
+Route::get('login',[PassportController::class, 'loginView']);
+Route::post('login', [PassportController::class, 'login'])->name('login2');
+Route::post('logout', [PassportController::class, 'logout'])->name('logout');
 
 
 Route::middleware('auth:api')->group( function () {
