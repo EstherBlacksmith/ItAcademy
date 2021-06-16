@@ -10,7 +10,6 @@
                 <th></th>
                 <th scope="col">Name</th>
                 <th scope="col">Capacity</th>
-                <th scope="col">Update Shop</th>
                 <th scope="col">Delete Shop</th>
                 <th scope="col"></th>
                 <th scope="col">Burn Collars</th>
@@ -54,8 +53,17 @@
                                 height="30"/></a>
                     </td>
                 </tr>
+                
             @endforeach
+            
+            <div  role="alert"  id="error">
+            </div>
+            <script>
+            
+            </script>
 
+           
+            
         </tbody>
     </table>
 </div>

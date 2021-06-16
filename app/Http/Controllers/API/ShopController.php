@@ -100,47 +100,63 @@ class ShopController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request){      
-/*
-        if ($request->elemento == "capacity"){   
-                
-            $validator = Validator::make($request->capacity, [
-                'capacity' => 'required',
-            ]);
-        }
-
-        if ($request->elemento == "name"){     
-    
-            $validator = Validator::make($request->name, [
-                'name' => 'required',
-            ]);
-        }
-*/
-        $validated = $request->validate([
-            'capacity' => 'numeric',
+    public function update(Request $request){  
+        
+        
+        $validator = Validator::make($request->only('elemento', 'id','valor'), [
+            'elemento' => 'required',
+            'id' => 'required',
             'valor' => 'required'
         ]);
-       
 
-        if($validated->fails()){
-            return response()->json(['Errors',404]);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => $validator->errors(),
+                'messages' =>$validator->messages(),
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => true,
+                'ok' => $validator,      
+                'messages' =>'Shop updated successfully',
+            ], 200);
+
         }
+
+        /*try {
+            $request->validate([
+                'elemento' => 'required',
+                'id' => 'required',
+                'valor' => 'required'
+            ]);
+
+            /*if($validated->fails()){
+                return response()->json(['Errors',404]);
+            }*/
+            
+      /*  } catch (Throwable $e) {           
+            dd($e);
+        }*/
         
-        $collars = Shop::collars()->all();
-        
-        if($input['capacity'] < count($collars)){
+              
+        $shop = Shop::find($request->id);
+        $collars = $shop->collars();    
+
+
+        /*if($request->capacity < count($i)){
              return Redirect::back()->with('errors','The amount of necklaces stored is greater than the new capacity of the shop');
-        }
-
+        }*/
+       
          if ($request->elemento == "capacity"){
             $shop->capacity = $request->valor;
          }else{
             $shop->name = $request->valor;
          }
-
-         $shop->save();
          
-        return response()->json(['success','Shop updated successfully']);
+         $shop->save();         
+         
+        return response()->json(['success','Shop updated successfully'],200);
     }
 
     /**

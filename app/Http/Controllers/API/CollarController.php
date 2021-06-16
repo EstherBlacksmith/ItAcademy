@@ -85,8 +85,10 @@ class CollarController extends BaseController
         return Redirect::back()->with('success','Collar retrieved successfully.');
     }
 
-    public function updateView(Collar $collar)
-    {
+    public function updateView($id)
+    {  
+        $collar = Collar::find($id);
+
         return view('collars/update', compact('collar'));
     }
 
@@ -97,8 +99,32 @@ class CollarController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Collar $collar)
-    {
+    public function update(Request $request)
+    {   dd($request);
+        $collar = Collar::find($request->id);
+
+        $validator = Validator::make($request->only('elemento', 'id','valor'), [
+            'name' => 'required',
+            'author' => 'required',
+            'date' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => $validator->errors(),
+                'messages' =>$validator->messages(),
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => true,
+                'ok' => $validator,      
+                'messages' =>'Shop updated successfully',
+            ], 200);
+
+        }
+
+        /*
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -109,14 +135,16 @@ class CollarController extends BaseController
 
         if($validator->fails()){
             return Redirect::back()->with('errors',$validator->errors());
-        }
+        }*/
 
-        $collar->name = $input['name'];
-        $collar->author = $input['author'];
-        $collar->capacity = $input['capacity'];
+        $collar->name = $validator->name;
+        $collar->author = $validator->author;
+        $collar->capacity = $validator->capacity;
         $collar->save();
 
-        return Redirect::back()->with('success','Collar updated successfully.');
+        return response()->json(['success','Collar updated successfully'],200);
+
+        //return Redirect::back()->with('success','Collar updated successfully.');
 
     }
 

@@ -108,21 +108,15 @@
        
     </div>
     <div class="container" >
-                <div class="row">
-                @yield('content')
-                
-                @if(session('success'))
-                    <div class="alert alert-light" role="alert">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if(session('errors'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('errors') }}
-                    </div>
-                @endif
+        <div class="row">
+        @yield('content')
+        
+        @if(session('success'))
+            <div class="alert alert-light" role="alert">
+                {{ session('success') }}
             </div>
+        @endif
+    </div>
        
 </body>
 </html>
