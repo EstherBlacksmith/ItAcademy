@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:api','role:owner']], function () {
 });
 
 
-/*Route::group(['middleware' => ['auth:api','role:owner|worker']], function () {*/
+Route::group(['middleware' => ['auth:api','role:owner|worker']], function () {
     //create, delete, update collars
     Route::get('collars',[CollarController::class,'index'])->name('collars');
     Route::get('createCollars',[CollarController::class,'create'])->name('createCollars');
@@ -54,4 +54,4 @@ Route::group(['middleware' => ['auth:api','role:owner']], function () {
 
     Route::post('deleteCollar/{shop}',[CollarController::class,'delete'])->name('deleteCollar');
    
-/*});*/
+});

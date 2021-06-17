@@ -7,7 +7,6 @@
 
 
 function updateCollar() {  
-
   var authorValue = element.getElementsById('author')[0].value;
   var dateValue = element.getElementsById('date')[0].value;
   var nameValue = element.getElementsById('name')[0].value;
@@ -43,10 +42,10 @@ function updateCollar() {
         // handle error
         console.log(response.data);
       });
-              
-    }  
+            
+    
 
 
-});
+}
 
 </script>

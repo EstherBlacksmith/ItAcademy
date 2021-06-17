@@ -21,7 +21,7 @@
                 value="{{ $collar->date}}">
         </div>
         <input type="hidden" id="id" value="{{$collar->id}}"/>
-        <button type="submit" class="btn btn-primary" onclick="updateCollar()">Submit</button>
+        <button type="button" onclick="updateCollar(); return false;" class="btn btn-primary">Submit</button>
     </form>
 </div>
 <div  role="alert"  id="error"></div>
