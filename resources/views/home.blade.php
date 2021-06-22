@@ -28,8 +28,6 @@
             <div class="col  col-2">
                 <div class="card" style="max-width: 18rem;">
 
-                    <img src="{{ asset('images/torc.png') }}" onClick = this.src ="{{ asset('images/pinturas_con_gato_01.jpg') }}"  
-                                                               onMouseOut = this.src ="{{ asset('images/torc.png') }}" class="card-img-top" />
                     <div class="card-body">
                         <h5 class="card-title">La Miauconda</h5>
 
@@ -38,8 +36,7 @@
             </div>
             <div class="col  col-2">
                 <div class="card" style="max-width: 18rem;">
-                    <img src="{{ asset('images/gem-pendant.png') }}" class="card-img-top"
-                        alt="...">
+                   
                     <div class="card-body">
                         <h5 class="card-title">The cat with a pearl</h5>
 
@@ -48,8 +45,6 @@
             </div>
             <div class="col  col-2">
                 <div class="card" style="max-width: 18rem;">
-                    <img src="{{ asset('images/pearl-necklace.png') }}" class="card-img-top"
-                        alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Kiss Kat</h5>
 
