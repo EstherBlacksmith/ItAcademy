@@ -16,7 +16,7 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
-
+       
         $shops = Shop::all();
   
         if (Auth::check()) {
@@ -59,7 +59,7 @@ class ShopController extends Controller{
         return Redirect::back()->with('success','Shop created successfully.');
     }
 
-    public function edit(Shop $shop){
+    public function edit(int $shop){
         return view('shops/edit', compact('shop'));
     }
 
@@ -120,7 +120,6 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy(Shop $shop){
-        dd('llega');
         $shop->delete();
         return Redirect::back()->with('success','Shop deleted successfully.');
     }

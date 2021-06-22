@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "a353438d-41cf-47db-bd82-e452b0d2aed6",
+		"name": "White_collar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/api/login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNWM0MzY5Y2E2MGI1MDJiZGRmMTk1MTZjYTAwNjlkNzgyYTAzZmM5NDkyOTdjZmUxMzZiNmYzZmZjMjUyMDEzMDE4YjdmZjc0YTRiYTViNmQiLCJpYXQiOjE2MjQwMjU1NzkuODE5MjQ2LCJuYmYiOjE2MjQwMjU1NzkuODE5MjQ5LCJleHAiOjE2NTU1NjE1NzkuODE0MjY2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.kyyV-qtXp6L3A_5KFRWFIOdbOp0o6AYuFywq4P6TOVBcYf3c8A-SXYlPR8uhSALMf6kqNjreS5XV6HSCPAwNIVizui6LTNXoH-Kuo1_7gwuHt5D77RYb5G3XWBrIegjYBw7Og8smDgkeU4rIrTYiCnO--BxCV7YA_QX47N_C9v9yqBV1A5T0uGELMVhlvQGb34AH0Wr2h4nAaVxSPOuUVsRBdJN26yu2nZdSGS9ZjAuPTYYuZobCz7FxHOI6jdWEmTZ6IA0nNy2eky0KUVY2TcSVzVo8iA8r12TIaO5joHdrmClrdIZyGQsFcpngtfoU-2l8Gun4dsK9UZuIGFLAwgA49Hb6mmxZRn7hWnIljfMcO9EZatDqugqjJIEziE-1WBVkOV1e-3sSEJjqsqLASyrcaT3ur-tDYF2A6jokegVmDE1etuxYdzToRgV6QAcKSBG6fCY-Vd8k4PTfjmlOEI0ZzbgWu4a-nPUHdE4DNVkce6RejHs-LTSJP4Uq6dfVYVJv14SGEN2tZil7QAeqdLnbWrjXS7Z43nT4DczCGO-ujU9iQCo1R-4HqBK8XbBXGeUUMbq8ycp6VPBxCTsJptBogr3VviuiOy9GXkORNeqR8Or4zAjl8GkNn2hEjy4SnWXZa1erv8vIUMdsicFzy5dtiHot5ObnhaJ4t7bLqJU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "nromaguera@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "post login\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"logout"
+					]
+				},
+				"description": "logout"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/shops",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops"
+					]
+				},
+				"description": "get shops\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/createShops",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops/create",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops",
+						"create"
+					]
+				},
+				"description": "Create shop"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/createShops",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops"
+					]
+				},
+				"description": "POST create shop"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/shops/shop/edit",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops/1/edit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops",
+						"1",
+						"edit"
+					]
+				},
+				"description": "get Update shop"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shop",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops",
+						"1"
+					]
+				},
+				"description": "PUT Store Update"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/shops/shop",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "shop",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops",
+						"1"
+					]
+				},
+				"description": "DELETE Shop"
+			},
+			"response": []
+		}
+	]
+}

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CollarController;
 
 
 /*
@@ -21,6 +22,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
+Route::get('register',[PassportController::class, 'create'])->name('register.show');
+Route::post('register', [PassportController::class, 'register'])->name('register');
+
+
 Route::get('login',[PassportController::class, 'show'])->name('login.show');
 Route::post('login', [PassportController::class, 'login'])->name('login');
 
@@ -28,13 +35,17 @@ Route::post('login', [PassportController::class, 'login'])->name('login');
 Route::group(['middleware' => ['auth:api']], function () {    
     Route::post('logout', [PassportController::class, 'logout'])->name('logout');
 
-    Route::get('shops',[ShopController::class,'index'])->name('shops.index');    
-    Route::get('shops/create',[ShopController::class,'create'])->name('shops.create');
-    Route::post('shops',[ShopController::class,'store'])->name('shops.store');
+    Route::get('shops',[ShopController::class,'index'])->name('index.shops');    
+    Route::get('shops/create',[ShopController::class,'create'])->name('create.shops');
+    Route::post('shops',[ShopController::class,'store'])->name('store.shops');
 
-    Route::get('shop/{shop}/edit',[ShopController::class,'edit'])->name('shops.edit');
+    Route::get('shops/{shop}/edit',[ShopController::class,'edit'])->name('shops.edit');
     Route::put('shops/{shop}',[ShopController::class,'update'])->name('shops.update');
     Route::delete('shops/{shop}',[ShopController::class,'destroy'])->name('shops.destroy');
+
+    Route::get('collars',[CollarController::class,'index'])->name('index.collars');
+    Route::get('createCollars',[CollarController::class,'create'])->name('create.collars');
+
 
  /*   Route::get('burnCollars/{shop}',[CollarController::class,'burnCollars'])->name('burnCollars');
 
