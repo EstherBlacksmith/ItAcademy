@@ -30,17 +30,21 @@ Route::post('register', [PassportController::class, 'register'])->name('register
 
 Route::get('login',[PassportController::class, 'show'])->name('login.show');
 Route::post('login', [PassportController::class, 'login'])->name('login');
+  
 
+
+Route::get('shops/{shop}/edit',[ShopController::class,'edit'])->name('shops.edit');
+Route::put('shops/{shop}',[ShopController::class,'update'])->name('shops.update');
 
 Route::group(['middleware' => ['auth:api']], function () {    
-    Route::post('logout', [PassportController::class, 'logout'])->name('logout');
+    Route::post('logout', [PassportController::class, 'logout'])->name('logout'); 
 
-    Route::get('shops',[ShopController::class,'index'])->name('index.shops');    
+    Route::get('shops',[ShopController::class,'index'])->name('index.shops');  
+    
     Route::get('shops/create',[ShopController::class,'create'])->name('create.shops');
     Route::post('shops',[ShopController::class,'store'])->name('store.shops');
 
-    Route::get('shops/{shop}/edit',[ShopController::class,'edit'])->name('shops.edit');
-    Route::put('shops/{shop}',[ShopController::class,'update'])->name('shops.update');
+    
     Route::delete('shops/{shop}',[ShopController::class,'destroy'])->name('shops.destroy');
 
     Route::get('collars',[CollarController::class,'index'])->name('index.collars');

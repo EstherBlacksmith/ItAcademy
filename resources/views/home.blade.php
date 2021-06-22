@@ -6,7 +6,6 @@
     <div class="container">
         <div class="row">
             <h1 class="display-4">White Collar</h1>
-            Token: {{ Auth::user()->token() }}
         </div>
         <div class="row">
             <p class="lead">Modern jewelry art</p>

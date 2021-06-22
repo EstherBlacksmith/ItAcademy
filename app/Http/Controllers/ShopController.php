@@ -16,18 +16,19 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
-       
+        dd('llega');
         $shops = Shop::all();
-  
+        return response()->json(['shops' => $shops], 200);
+  /*
         if (Auth::check()) {
             $token = auth()->user()->createToken('Personal Access Token')->accessToken;
 
             return view('shops.show', compact('shops','token'));
 
            // return response()->json(['token' => $token], 200);
-        } else {           
-            return view('shops.show', compact('shops'));          
-        }  
+        } else {*/           
+           // return view('shops.show', compact('shops'));          
+        /*}  */
     }    
 
     public function create()
@@ -59,7 +60,8 @@ class ShopController extends Controller{
         return Redirect::back()->with('success','Shop created successfully.');
     }
 
-    public function edit(int $shop){
+    public function edit(int $id){
+        $shop = Shop::find($id);
         return view('shops/edit', compact('shop'));
     }
 
@@ -70,8 +72,8 @@ class ShopController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Shop $shop){         
-        
+    public function update(Request $request, $id,$name,$capacity){         
+        dd($request);
         $validator = Validator::make($request->only('elemento', 'id','valor'), [
             'elemento' => 'required',
             'id' => 'required',

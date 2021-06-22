@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'White Collar') }}</title>
 
     <!-- Scripts -->
@@ -22,9 +19,18 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
+<script>
+    $( document ).ready(function() {
+        if(!localStorage.getItem('token')){
+            let token = "<?php echo isset($token) ? $token : ''; ?>";
+            localStorage.token = token;
+        }
+    });       
+</script>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -39,16 +45,20 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('index.shops') }}">{{ __('Shops') }}</a>
+                          <!--  <a class="nav-link" href="{{ route('index.shops') }}">{{ __('Shops') }}</a> !-->
+                            <button onClick="route('/api/shops')">{{ __('Shops') }}</button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create.shops') }}">{{ __('Create shops') }}</a>
+                            <!-- <a class="nav-link" href="{{ route('create.shops') }}">{{ __('Create shops') }}</a> !-->
+                            <button onClick="route('create.shops')">{{ __('Create shops') }}</button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('index.collars') }}">{{ __('Collars') }}</a>
+                             <!--  <a class="nav-link" href="{{ route('index.collars') }}">{{ __('Collars') }}</a> !-->
+                             <button onClick="route('index.collars')">{{ __('Collars') }}</button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create.collars') }}">{{ __('Create collars') }}</a>
+                             <!--  <a class="nav-link" href="{{ route('create.collars') }}">{{ __('Create collars') }}</a> !-->
+                             <button onClick="route('create.collars')">{{ __('Create collars') }}</button>
                         </li>
                     </ul>
 
@@ -70,7 +80,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} --- {{dd(Auth::user())}}
+                                    {{ Auth::user()->name }} 
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -94,21 +104,47 @@
        
     </div>
     <div class="container" >
-                <div class="row">
-                @yield('content')
-                
-                @if(session('success'))
-                    <div class="alert alert-light" role="alert">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if(session('error'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('error') }}
-                    </div>
-                @endif
+            
+        <div class="row">
+        @yield('content')
+        
+        @if(session('success'))
+            <div class="alert alert-light" role="alert">
+                {{ session('success') }}
             </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+        </div>
+    </div>       
+  <script>
+          function route(route) {
+              alert(route);
+              console.log(route);
+            axios.defaults.headers.common = {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            };
+          
+            axios({
+                method: 'get',
+                url: route
+                            
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+                //window.location =route;
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });           
+        }
        
+    </script>
 </body>
 </html>
