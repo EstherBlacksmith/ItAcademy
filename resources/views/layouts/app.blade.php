@@ -32,37 +32,36 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('home') }}">
+                <a class="navbar-brand" onClick="route('home')">
                     {{ config('app.name', 'White Collar') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                          <!--  <a class="nav-link" href="{{ route('index.shops') }}">{{ __('Shops') }}</a> !-->
                             <button onClick="route('/api/shops')">{{ __('Shops') }}</button>
                         </li>
                         <li class="nav-item">
                             <!-- <a class="nav-link" href="{{ route('create.shops') }}">{{ __('Create shops') }}</a> !-->
-                            <button onClick="route('create.shops')">{{ __('Create shops') }}</button>
+                            <button onClick="route('/api/shops/create')">{{ __('Create shops') }}</button>
                         </li>
                         <li class="nav-item">
-                             <!--  <a class="nav-link" href="{{ route('index.collars') }}">{{ __('Collars') }}</a> !-->
-                             <button onClick="route('index.collars')">{{ __('Collars') }}</button>
+                             <button onClick="route('/api/collars')">{{ __('Collars') }}</button>
                         </li>
                         <li class="nav-item">
                              <!--  <a class="nav-link" href="{{ route('create.collars') }}">{{ __('Create collars') }}</a> !-->
-                             <button onClick="route('create.collars')">{{ __('Create collars') }}</button>
+                             <button onClick="route('/api/collars/create')">{{ __('Create collars') }}</button>
                         </li>
                     </ul>
-
+                
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -76,6 +75,7 @@
                                 </li>
                             @endif
                         @else
+             
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} 
@@ -121,8 +121,7 @@
     </div>       
   <script>
           function route(route) {
-              alert(route);
-              console.log(route);
+               console.log(route);
             axios.defaults.headers.common = {
                 "Content-Type": "application/json", 
                 'Authorization': 'Bearer '+ localStorage.getItem("token"), 
@@ -138,7 +137,7 @@
             .then(function (response) {
                 //handle success
                 console.log(response);
-                //window.location =route;
+                window.location = route;
             })
             .catch(function (response) {
                 //handle error

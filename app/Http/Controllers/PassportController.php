@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Controllers\HomeController;
 
 class PassportController extends Controller
-{
-    /**
+{    /**
     * Passport loginView
     *
     * @return loginView
@@ -24,7 +24,6 @@ class PassportController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8'
         ]);
-
         $data = [
             'email' => $request->email,
             'password' => $request->password
@@ -33,11 +32,14 @@ class PassportController extends Controller
         if (Auth::attempt($data)) {
             $user = Auth::user();
             $token = $user->createToken('PersonalAccessToken')->accessToken;
-            return  view('home',compact('token'));
+            //return  view('home',compact('token'));        
+
+            return redirect()->action([HomeController::class, 'index' ], ['token' => $token]);
+
            // return response()->json($token,200);
         } else {
             return response(['error' => 'Unauthorized']);
-        }
+        }     
                 
     }
 

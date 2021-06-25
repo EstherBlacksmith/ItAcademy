@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CollarController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -34,33 +35,32 @@ Route::post('login', [PassportController::class, 'login'])->name('login');
 
 
 Route::get('shops/{shop}/edit',[ShopController::class,'edit'])->name('shops.edit');
-Route::put('shops/{shop}',[ShopController::class,'update'])->name('shops.update');
+
+Route::get('shops',[ShopController::class,'index'])->name('index.shops');  
+
+Route::get('home', [HomeController::class, 'index'])->name('home'); 
+
+Route::get('shops/create',[ShopController::class,'create'])->name('create.shops');
+
+Route::get('collars',[CollarController::class,'index'])->name('index.collars');
+Route::get('collars/{shop}/edit',[CollarController::class,'edit'])->name('collars.edit');
+
+Route::get('collars/create',[CollarController::class,'create'])->name('create.collars');
+
+
 
 Route::group(['middleware' => ['auth:api']], function () {    
+
     Route::post('logout', [PassportController::class, 'logout'])->name('logout'); 
 
-    Route::get('shops',[ShopController::class,'index'])->name('index.shops');  
-    
-    Route::get('shops/create',[ShopController::class,'create'])->name('create.shops');
     Route::post('shops',[ShopController::class,'store'])->name('store.shops');
 
-    
     Route::delete('shops/{shop}',[ShopController::class,'destroy'])->name('shops.destroy');
+    Route::put('shops/{shop}',[ShopController::class,'update'])->name('shops.update');
 
-    Route::get('collars',[CollarController::class,'index'])->name('index.collars');
-    Route::get('createCollars',[CollarController::class,'create'])->name('create.collars');
+    Route::post('collars',[CollarController::class,'store'])->name('store.collars');
+    Route::put('collars/{collar}',[CollarController::class,'update'])->name('collars.update');
+    Route::delete('collars/{collar}',[CollarController::class,'destroy'])->name('collars.destroy');
 
-
- /*   Route::get('burnCollars/{shop}',[CollarController::class,'burnCollars'])->name('burnCollars');
-
-    //create, delete, update collars
-    Route::get('collars',[CollarController::class,'index'])->name('collars');
-    Route::get('createCollars',[CollarController::class,'create'])->name('createCollars');
-    Route::post('createCollars',[CollarController::class,'store'])->name('storeCollar');
-
-    Route::get('updateCollar/{id}',[CollarController::class,'updateView'])->name('updateCollar');
-    Route::put('updateCollarStore',[CollarController::class,'update'])->name('updateCollarStore');
-
-    Route::post('deleteCollar/{shop}',[CollarController::class,'delete'])->name('deleteCollar');*/
 });
 

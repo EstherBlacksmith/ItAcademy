@@ -16,19 +16,8 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        dd('llega');
         $shops = Shop::all();
-        return response()->json(['shops' => $shops], 200);
-  /*
-        if (Auth::check()) {
-            $token = auth()->user()->createToken('Personal Access Token')->accessToken;
-
-            return view('shops.show', compact('shops','token'));
-
-           // return response()->json(['token' => $token], 200);
-        } else {*/           
-           // return view('shops.show', compact('shops'));          
-        /*}  */
+        return view('shops/show',compact('shops'));           
     }    
 
     public function create()
@@ -43,7 +32,7 @@ class ShopController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        
+
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -51,10 +40,14 @@ class ShopController extends Controller{
             'capacity' => 'required'
         ]);
 
-        if($validator->fails()){
-            return Redirect::back()->with('errors', $validator->errors());
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => $validator->errors(),
+                'messages' =>$validator->messages(),
+            ], 200);
         }
-
+        
         $shop = Shop::create($input);
 
         return Redirect::back()->with('success','Shop created successfully.');
@@ -72,12 +65,11 @@ class ShopController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,$name,$capacity){         
-        dd($request);
-        $validator = Validator::make($request->only('elemento', 'id','valor'), [
-            'elemento' => 'required',
+    public function update(Request $request){         
+        $validator = Validator::make($request->only('name', 'id','capacity'), [
+            'name' => 'required',
             'id' => 'required',
-            'valor' => 'required'
+            'capacity' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -86,31 +78,12 @@ class ShopController extends Controller{
                 'error' => $validator->errors(),
                 'messages' =>$validator->messages(),
             ], 200);
-        }else{
-            return response()->json([
-                'success' => true,
-                'ok' => $validator,      
-                'messages' =>'Shop updated successfully',
-            ], 200);
-
         }
 
-        
         $shop = Shop::find($request->id);
-        $collars = $shop->collars();    
-
-
-        /*if($request->capacity < count($i)){
-             return Redirect::back()->with('errors','The amount of necklaces stored is greater than the new capacity of the shop');
-        }*/
-       
-         if ($request->elemento == "capacity"){
-            $shop->capacity = $request->valor;
-         }else{
-            $shop->name = $request->valor;
-         }
-         
-         $shop->save();         
+        $shop->capacity = $request->capacity;
+        $shop->name = $request->name;
+        $shop->save();         
          
         return response()->json(['success','Shop updated successfully'],200);
     }
@@ -123,6 +96,7 @@ class ShopController extends Controller{
      */
     public function destroy(Shop $shop){
         $shop->delete();
+        
         return Redirect::back()->with('success','Shop deleted successfully.');
     }
 

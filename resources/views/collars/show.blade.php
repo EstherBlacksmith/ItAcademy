@@ -1,21 +1,24 @@
 @extends('layouts.app')
 @section('content')
 
-@foreach($shops as $shop)
+@foreach($collars as $collar)
     <ul>
-    <li>Shop:
-    {{$shop->name}}
+    <li>Collar:
+    {{$collar->name}}
     </li>
-    <li>Capacity:
-    {{$shop->capacity}}
+    <li>Author:
+    {{$collar->author}}
     </li>
-    <li>{{$shop->id}}</li>
+    <li>Date:
+    {{$collar->date}}
+    </li>  
+    
     <li>
-    <a href="{{route('shops.edit',$shop->id)}}">Edit</a>
-    <form>
-        <input type="hidden" id = "id" value="{{$shop->id}}">
-        <button type="button" onClick="update({{$shop->id}})" class="btn btn-primary"> Delete </button>
-    </form>
+      <a href="{{route('collars.edit',$collar->id)}}">Edit</a>
+      <form>
+          <input type="hidden" id ="id" value="{{$collar->id}}">
+          <button type="button" onClick="update({{$collar->id}})" class="btn btn-primary"> Delete </button>
+      </form>
     </li>
     </ul>
     
@@ -23,18 +26,16 @@
 
  
 <script>
-      function update(id) {
-       
+      function update(id) {   
         axios.defaults.headers.common = {
           "Content-Type": "application/json", 
           'Authorization': 'Bearer '+ localStorage.getItem("token"), 
           'Accept': 'application/json'   
         };
 
-        axios.post('/api/shops/' + id ,{_method: 'delete'})        
+        axios.post('/api/collars/' + id,{_method: 'delete'} )        
         .then(function (response) { 
           console.log(response);         
-           // this.$emit('add', response.data.shop);
         })
         .catch(function (response) {
             //handle error

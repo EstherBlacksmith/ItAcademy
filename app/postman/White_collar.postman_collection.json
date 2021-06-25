@@ -179,6 +179,21 @@
 				},
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tienda 1",
+							"type": "text"
+						},
+						{
+							"key": "capacity",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
 				"url": {
 					"raw": "http://127.0.0.1:8000/api/shops",
 					"protocol": "http",
@@ -266,9 +281,19 @@
 					"formdata": [
 						{
 							"key": "shop",
-							"value": "1",
+							"value": "9",
 							"type": "text",
 							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Tienda 1",
+							"type": "text"
+						},
+						{
+							"key": "capacity",
+							"value": "6",
+							"type": "text"
 						}
 					]
 				},
@@ -324,7 +349,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/shops/1",
+					"raw": "http://127.0.0.1:8000/api/shops/?id=9",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -336,10 +361,126 @@
 					"path": [
 						"api",
 						"shops",
-						"1"
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "9"
+						}
 					]
 				},
 				"description": "DELETE Shop"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/collars",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNWM0MzY5Y2E2MGI1MDJiZGRmMTk1MTZjYTAwNjlkNzgyYTAzZmM5NDkyOTdjZmUxMzZiNmYzZmZjMjUyMDEzMDE4YjdmZjc0YTRiYTViNmQiLCJpYXQiOjE2MjQwMjU1NzkuODE5MjQ2LCJuYmYiOjE2MjQwMjU1NzkuODE5MjQ5LCJleHAiOjE2NTU1NjE1NzkuODE0MjY2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.kyyV-qtXp6L3A_5KFRWFIOdbOp0o6AYuFywq4P6TOVBcYf3c8A-SXYlPR8uhSALMf6kqNjreS5XV6HSCPAwNIVizui6LTNXoH-Kuo1_7gwuHt5D77RYb5G3XWBrIegjYBw7Og8smDgkeU4rIrTYiCnO--BxCV7YA_QX47N_C9v9yqBV1A5T0uGELMVhlvQGb34AH0Wr2h4nAaVxSPOuUVsRBdJN26yu2nZdSGS9ZjAuPTYYuZobCz7FxHOI6jdWEmTZ6IA0nNy2eky0KUVY2TcSVzVo8iA8r12TIaO5joHdrmClrdIZyGQsFcpngtfoU-2l8Gun4dsK9UZuIGFLAwgA49Hb6mmxZRn7hWnIljfMcO9EZatDqugqjJIEziE-1WBVkOV1e-3sSEJjqsqLASyrcaT3ur-tDYF2A6jokegVmDE1etuxYdzToRgV6QAcKSBG6fCY-Vd8k4PTfjmlOEI0ZzbgWu4a-nPUHdE4DNVkce6RejHs-LTSJP4Uq6dfVYVJv14SGEN2tZil7QAeqdLnbWrjXS7Z43nT4DczCGO-ujU9iQCo1R-4HqBK8XbBXGeUUMbq8ycp6VPBxCTsJptBogr3VviuiOy9GXkORNeqR8Or4zAjl8GkNn2hEjy4SnWXZa1erv8vIUMdsicFzy5dtiHot5ObnhaJ4t7bLqJU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/collars",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"collars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/collars/17/edit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNWM0MzY5Y2E2MGI1MDJiZGRmMTk1MTZjYTAwNjlkNzgyYTAzZmM5NDkyOTdjZmUxMzZiNmYzZmZjMjUyMDEzMDE4YjdmZjc0YTRiYTViNmQiLCJpYXQiOjE2MjQwMjU1NzkuODE5MjQ2LCJuYmYiOjE2MjQwMjU1NzkuODE5MjQ5LCJleHAiOjE2NTU1NjE1NzkuODE0MjY2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.kyyV-qtXp6L3A_5KFRWFIOdbOp0o6AYuFywq4P6TOVBcYf3c8A-SXYlPR8uhSALMf6kqNjreS5XV6HSCPAwNIVizui6LTNXoH-Kuo1_7gwuHt5D77RYb5G3XWBrIegjYBw7Og8smDgkeU4rIrTYiCnO--BxCV7YA_QX47N_C9v9yqBV1A5T0uGELMVhlvQGb34AH0Wr2h4nAaVxSPOuUVsRBdJN26yu2nZdSGS9ZjAuPTYYuZobCz7FxHOI6jdWEmTZ6IA0nNy2eky0KUVY2TcSVzVo8iA8r12TIaO5joHdrmClrdIZyGQsFcpngtfoU-2l8Gun4dsK9UZuIGFLAwgA49Hb6mmxZRn7hWnIljfMcO9EZatDqugqjJIEziE-1WBVkOV1e-3sSEJjqsqLASyrcaT3ur-tDYF2A6jokegVmDE1etuxYdzToRgV6QAcKSBG6fCY-Vd8k4PTfjmlOEI0ZzbgWu4a-nPUHdE4DNVkce6RejHs-LTSJP4Uq6dfVYVJv14SGEN2tZil7QAeqdLnbWrjXS7Z43nT4DczCGO-ujU9iQCo1R-4HqBK8XbBXGeUUMbq8ycp6VPBxCTsJptBogr3VviuiOy9GXkORNeqR8Or4zAjl8GkNn2hEjy4SnWXZa1erv8vIUMdsicFzy5dtiHot5ObnhaJ4t7bLqJU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/collars/17/edit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"collars",
+						"17",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/shops/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shops/create?name=un collar&author=anonimo&id_shop=10&date=01/01/2020",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shops",
+						"create"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "un collar"
+						},
+						{
+							"key": "author",
+							"value": "anonimo"
+						},
+						{
+							"key": "id_shop",
+							"value": "10"
+						},
+						{
+							"key": "date",
+							"value": "01/01/2020"
+						}
+					]
+				}
 			},
 			"response": []
 		}

@@ -10,36 +10,37 @@
     <label for="capacity">Capacity</label>
     <input type="capacity" class="form-control" id="capacity" placeholder="capacity"  value ="{{$shop->capacity}}">
   </div> 
-  <input type="hidden" id="id" value="{{$shop->id}}"</input>
+  <input type="hidden" id="id" value="{{$shop->id}}">
   <button type="button" onClick="update()" class="btn btn-primary"> Submit </button>
 </form>
-
+ 
 <script>
-          function update() {
-            
-            id = document.getElementById('id').value;
-            name = document.getElementById('shopname').value;
-            capacity = document.getElementById('capacity').value;
-            
-            axios.defaults.headers.common = {
-                Authorization: "Bearer " + localStorage.getItem("token")
-            };
-            
-            axios({
-                method: 'put',
-                url: '/api/shops/' + id,
-                id:id,
-                name:name,
-                capacity:capacity                            
-            })
-            .then(function (response) {
-                this.$emit('add', response.data.shop);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });           
-        }
+      function update() {
+       
+        id = document.getElementById('id').value;
+        name = document.getElementById('shopname').value;
+        capacity = document.getElementById('capacity').value;
+
+        axios.defaults.headers.common = {
+          "Content-Type": "application/json", 
+          'Authorization': 'Bearer '+ localStorage.getItem("token"), 
+          'Accept': 'application/json'   
+        };
+        axios.put('/api/shops/' + id,
+          { id:id,
+            name:name,
+            capacity:capacity,
+            withCredentials: true})
+
+        .then(function (response) { 
+          console.log(response);         
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });           
+    }
        
 </script>
 @endsection
+
