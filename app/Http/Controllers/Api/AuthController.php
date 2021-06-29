@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GamblingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Validator;
-use Tymen\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class AuthController extends Controller
 {
@@ -45,11 +47,7 @@ class AuthController extends Controller
         $token = JWTAuth::attempt($request->only('email', 'password'));
 
         if($token) {
-            return response()->json([
-                'success' => true,
-                'token' => $token,
-                'user' => Auth::user()
-            ], 200);
+            return redirect()->action([GamblingController::class, 'play' ], ['token' => $token]);
         } else {
             return response()->json([
                 'success' => false,

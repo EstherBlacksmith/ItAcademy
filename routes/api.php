@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\GamblingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,17 +22,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('loginForm',function(){
     return view('auth.login');
-
 })->name('loginForm');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-//Route::get('loginForm', [\App\Http\Controllers\Api\AuthController::class, 'loginForm'])->name('loginForm');
+Route::post('/players', [AuthController::class, 'login'])->name('players');
+
+Route::get('play',[GamblingController::class,'play'])->name('play');
 
 Route::middleware('jwt.auth')->group(function(){
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+ 
 });
 
 /*

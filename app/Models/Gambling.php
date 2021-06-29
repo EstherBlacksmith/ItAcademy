@@ -19,4 +19,13 @@ class Gambling extends Model
         'd_1',
         'd_2',
     ];
+
+    /**
+     * Set the moves
+     */
+    public function Users(){
+        return $this->belongsToMany(User::class);
+    }
+
+   
 }

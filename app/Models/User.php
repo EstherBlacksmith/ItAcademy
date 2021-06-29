@@ -44,6 +44,13 @@ class User extends Authenticatable implements JWTSubject
 
 
     /**
+     * Get the moves
+     */
+    public function moves(){
+        return $this->belongsToMany(Gambling::class);
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
