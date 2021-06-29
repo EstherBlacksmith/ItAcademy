@@ -33,6 +33,7 @@ Route::middleware('jwt.auth')->group(function(){
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
 });
+
 /*
 Route::group([
     'middleware' => 'api',

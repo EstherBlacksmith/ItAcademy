@@ -29,26 +29,33 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request){
-        dd( $request);
-    	/*$validator = Validator::make($request->all(), [
+    public function login(Request $request) {
+        $validator = Validator::make($request->only('email', 'password'), [
             'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|min:8'
         ]);
-       
+
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'success' => false,
+                'error' => $validator->errors()
+            ], 422);
         }
 
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        $token = JWTAuth::attempt($request->only('email', 'password'));
 
-        $token = JWTAuth::attempt($request->only('email','password'));
-        
-        return $token;*/
-return "llega";
-        //return $this->createNewToken($token);
+        if($token) {
+            return response()->json([
+                'success' => true,
+                'token' => $token,
+                'user' => Auth::user()
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => 'Unauthorized'
+            ], 401);
+        }
     }
 
     /**
