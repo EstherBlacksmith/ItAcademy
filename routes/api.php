@@ -27,13 +27,15 @@ Route::get('loginForm',function(){
 Route::post('/players', [AuthController::class, 'login'])->name('players');
 
 Route::get('play',[GamblingController::class,'play'])->name('play');
+Route::get('setResult',[GamblingController::class,'setResult'])->name('setResult');
+
+Route::get('mygames',[GamblingController::class,'mygames'])->name('mygames'); 
 
 Route::middleware('jwt.auth')->group(function(){
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
- 
 });
 
 /*

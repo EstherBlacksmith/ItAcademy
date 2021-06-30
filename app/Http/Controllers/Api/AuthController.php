@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\GamblingController;
 use App\Models\User;
@@ -46,8 +47,12 @@ class AuthController extends Controller
 
         $token = JWTAuth::attempt($request->only('email', 'password'));
 
-        if($token) {
-            return redirect()->action([GamblingController::class, 'play' ], ['token' => $token]);
+        if($token) {      
+            Cookie::queue(Cookie::make('token', $token, 120));
+            //localStorage.setItem('token',$token);
+            return redirect()->route('play');
+           // return redirect()->route('play')->withCookie($token);
+        //    return redirect()->action([GamblingController::class, 'play' ], ['token' => $token]);
         } else {
             return response()->json([
                 'success' => false,

@@ -40,6 +40,7 @@ function login(){
     password: password
   })
   .then(function (response) {
+    window.location = "play";
     console.log(response);
   })
   .catch(function (error) {
