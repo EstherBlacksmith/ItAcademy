@@ -59,6 +59,21 @@ class GamblingController extends Controller
         return $games;
 
     }
+    public function ranking(){
+
+
+    }
+
+    public function winner(){
+        $game = Gambling::orderBy('');
+        Post::orderBy('id', 'DESC')->get();
+
+    }
+
+    public function loser(){
+
+
+    }
 
 
 }
