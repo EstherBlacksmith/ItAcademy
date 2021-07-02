@@ -18,26 +18,20 @@ use App\Models\Gambling;
  * GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.
  */
 class GamblingController extends Controller
-{
-    public function players(){       
-        \App\Models\User::factory(1)->create();
-    }
+{    
+    
 
-    public function update(Request $request,$id){
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->vave();
-    }
-
-    public function play($id){
+    public function games($id){
         $d1 = rand(1, 6);
         $d2 = rand(1, 6);
 
-        $game = new ambling();
+        $game = new Gambling();
         $game->d_1 = d1;
         $game->d_2 = d2;
         $game->user_id = $id;
         $game->save();
+
+        return response()->json(['games' => $game]);
     }
 
     public function delete($id){
@@ -48,17 +42,21 @@ class GamblingController extends Controller
                 $game->delete();
             }
         }
-    }
-    public function PlayersList(){
-        return User::All();
+        return response()->json(['deleted' => true]); 
     }
 
-    public function myGames($id){
+    public function PlayersList(){
+        $users = User::All();
+
+        return response()->json(['Users' => $users ]);
+    }
+
+    public function mygames($id){
         $games = gambling::find()->where('user_id','=',$id);
 
-        return $games;
-
+        return response()->json(['games' => $games ]);
     }
+
     public function ranking(){
 
 
@@ -66,7 +64,9 @@ class GamblingController extends Controller
 
     public function winner(){
         $game = Gambling::orderBy('');
-        Post::orderBy('id', 'DESC')->get();
+      /*  Post::orderBy('id', 'DESC')->get();*/
+
+        return response()->json(['games' => $games ]);
 
     }
 
