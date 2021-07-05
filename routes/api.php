@@ -33,7 +33,7 @@ Route::group([
     Route::post('players', [UserController::class,'player'])->name('player');
 
     /*  PUT /players/{id} : modifica el nom del jugador*/
-    Route::put('player/{id}', [UserController::class,'player'])->name('player');
+    Route::put('player/{id}', [UserController::class,'update'])->name('player');
     
     /*POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.*/
     Route::post('/players/{id}/games', [GamblingController::class,'games'])->name('games');
