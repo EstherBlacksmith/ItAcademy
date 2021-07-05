@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Gambling;
 
@@ -17,6 +18,7 @@ use App\Models\Gambling;
  * GET /players/ranking/loser: retorna el jugador amb pitjor percentatge d’èxit
  * GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.
  */
+
 class GamblingController extends Controller
 {       
 
@@ -36,26 +38,37 @@ class GamblingController extends Controller
 
     /*DELETE /players/{id}/games: elimina les tirades del jugador*/
     public function delete($id){
-        $games = gambling::all();
+        if(Auth::user()->hasRole('admin')){ //role control
+            $games = gambling::all();
 
-        foreach($games as $game){
-            if($game->user_id == $id){
-                $game->delete();
+            foreach($games as $game){
+                if($game->user_id == $id){
+                    $game->delete();
+                }
             }
+            return response()->json(['deleted' => true]); 
+
+        }else{
+            return response()->json(['error' => 'The current user need permissions']); 
         }
-        return response()->json(['deleted' => true]); 
+
+        
     }
 
     /*GET /players/: retorna el llistat de tots els jugadors del sistema amb el seu percentatge mig d’èxits */
     public function playersList(){
-        $score = array();
-        $users = User::All();
-        
-        foreach($users as $player){      
-            $score[$player->name] = $this->gamePercent($player->id);                    
-        }
+        if(Auth::user()->hasRole('admin')){ //role control
+            $score = array();
+            $users = User::All();
+            
+            foreach($users as $player){      
+                $score[$player->name] = $this->gamePercent($player->id);                    
+            }
 
-        return response()->json(['score' => $score ]);
+            return response()->json(['score' => $score ]);
+        }else{
+            return response()->json(['error' => 'The current user need permissions']); 
+        }
     }
 
     /*GET /players/{id}/games: retorna el llistat de jugades per un jugador.*/
@@ -66,37 +79,42 @@ class GamblingController extends Controller
 
     /*GET /players/ranking: retorna el ranking mig de tots els jugadors del sistema. És a dir, el percentatge mig d’èxits.*/
     public function ranking(){
-        $users = User::all();
-        $numPlayers = count($users);
-        $totalScore = 0;
-        $score = 0;
-   
-        foreach($users as $player){
-            $totalScore = $totalScore + ($this->gamePercent($player->id));         
-        }
+        if(Auth::user()->hasRole('admin')){ //role control
 
-        if ($numPlayers > 0){
-            $score = ($numPlayers / $totalScore) * 100;
-        }
+            $users = User::all();
+            $numPlayers = count($users);
+            $totalScore = 0;
+            $score = 0;
+    
+            foreach($users as $player){
+                $totalScore = $totalScore + ($this->gamePercent($player->id));         
+            }
 
-        return $score;
+            if ($numPlayers > 0 && $totalScore > 0){
+                $score = ($numPlayers / $totalScore) * 100;
+            }
+
+            return $score;
+        }else{
+            return response()->json(['error' => 'The current user need permissions']); 
+        }
     }
 
     /*    GET /players/ranking/winner: retorna el jugador amb millor percentatge d’èxit.*/
     public function winner(){      
         $users = User::All();
-        $totalScore = $this->gamePercent(User::first()->id) ;
+        $totalScore =0 ;
         $bestUser;
 
         foreach($users as $player){
             if($this->gamePercent($player->id) >=  $totalScore) {     
-                
+          
                 $totalScore = $this->gamePercent($player->id);
-                $bestUser = $player->name;
+                $bestUser = $player;
             }           
         }
 
-        return response()->json(['bestPlayer' => $player ]);
+        return response()->json(['bestPlayer' => $bestUser->name ]);
 
     }
 
@@ -104,7 +122,7 @@ class GamblingController extends Controller
     public function loser(){
 
         $users = User::All();
-        $totalScore = $this->gamePercent(User::first()->id) ;
+        $totalScore = 100;
         $worstUser;  
 
         foreach($users as $player){
@@ -115,7 +133,7 @@ class GamblingController extends Controller
             }
         }
 
-        return response()->json(['worstPlayer' => $player->name ]);
+        return response()->json(['worstPlayer' => $worstUser->name ]);
 
     }
 

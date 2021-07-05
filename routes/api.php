@@ -23,10 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group([
-
     'middleware' => 'api',
-    'namespace' => 'App\Http\Controllers',
-    'prefix' => 'auth'
+    'namespace' => 'App\Http\Controllers'    
 
 ], function ($router) {
     /*  POST: /players : crea un jugador*/
@@ -57,16 +55,9 @@ Route::group([
     Route::get('/players/winner', [GamblingController::class,'winner'])->name('winner');
 
 
-
-
-
     Route::post('login', [AuthController::class,'login'])->name('login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
 });
-
-
-/*
-*/

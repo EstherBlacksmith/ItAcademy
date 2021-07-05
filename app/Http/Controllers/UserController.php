@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     //create a new player
     public function player(Request $request){
-        echo($request->name);
+        
         if($request->name <> 'anonimo'){
             $user = User::where('name','=',$request->name)->first();
             if($user <> null){
@@ -23,7 +23,7 @@ class UserController extends Controller
         $user->password =  $request->password;
         
         $user->save();
-     
+    
         return response()->json(['created' => true,'user' => $user->name]);
     } 
 
