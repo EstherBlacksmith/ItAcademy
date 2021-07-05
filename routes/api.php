@@ -41,25 +41,22 @@ Route::group([
     /*  DELETE /players/{id}/games: elimina les tirades del jugador*/
     Route::delete('/players/{id}/games', [GamblingController::class,'delete'])->name('delete');
 
-    /*GET /players/: retorna el llistat de tots els jugadors del sistema amb el seu percentatge mig d’èxits*/
-    Route::get('/players/{id}/games', [GamblingController::class,'mygames'])->name('mygames');
-
     /* GET /players/: retorna el llistat de tots els jugadors del sistema amb el seu percentatge mig d’èxits */
     Route::get('/players', [GamblingController::class,'PlayersList'])->name('players');
 
+    /* GET /players/{id}/games: retorna el llistat de jugades per un jugador.*/
+    Route::get('/players/{id}/games', [GamblingController::class,'mygames'])->name('mygames');
+
+   /* GET /players/ranking: retorna el ranking mig de tots els jugadors del sistema. És a dir, el percentatge mig d’èxits.*/
+   Route::get('/players/ranking', [GamblingController::class,'ranking'])->name('ranking');
+
+    /*GET /players/ranking/loser: retorna el jugador amb pitjor percentatge d’èxit*/  
+    Route::get('/players/loser', [GamblingController::class,'loser'])->name('loser');
+
+    /*GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.*/
+    Route::get('/players/winner', [GamblingController::class,'winner'])->name('winner');
 
 
-
-
-
-    /*
-      
-        
-        GET /players/{id}/games: retorna el llistat de jugades per un jugador.
-        GET /players/ranking: retorna el ranking mig de tots els jugadors del sistema. És a dir, el percentatge mig d’èxits.
-        GET /players/ranking/loser: retorna el jugador amb pitjor percentatge d’èxit
-        GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.
-    */
 
 
 
@@ -72,13 +69,4 @@ Route::group([
 
 
 /*
-POST: /players : crea un jugador
-PUT /players/{id} : modifica el nom del jugador
-POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.
-DELETE /players/{id}/games: elimina les tirades del jugador
-GET /players/: retorna el llistat de tots els jugadors del sistema amb el seu percentatge mig d’èxits 
-GET /players/{id}/games: retorna el llistat de jugades per un jugador.
-GET /players/ranking: retorna el ranking mig de tots els jugadors del sistema. És a dir, el percentatge mig d’èxits.
-GET /players/ranking/loser: retorna el jugador amb pitjor percentatge d’èxit
-GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.
 */
