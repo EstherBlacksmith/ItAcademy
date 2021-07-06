@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use  App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Gambling;
+use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 
 /**
  * POST: /players : crea un jugador
@@ -21,9 +26,14 @@ use App\Models\Gambling;
 
 class GamblingController extends Controller
 {       
+    public function shake(){        
+        return view('playing');
+    }
 
     /*POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.*/
-    public function games($id){
+    public function games(){
+        $id = JWTAuth::user()->id;
+
         $d_1 = rand(1, 6);
         $d_2 = rand(1, 6);
 
@@ -33,7 +43,7 @@ class GamblingController extends Controller
         $game->user_id = $id;
         $game->save();
 
-        return response()->json(['games' => $game]);
+        return response()->json(['d_1' => $d_1]);
     }
 
     /*DELETE /players/{id}/games: elimina les tirades del jugador*/

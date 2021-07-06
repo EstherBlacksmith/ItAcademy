@@ -20,13 +20,14 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/login',function(){
+    return view('login');
+})->name('loginView');
 
+Route::post('login', [AuthController::class,'login'])->name('login');
 
-Route::group([
-    'middleware' => 'api',
-    'namespace' => 'App\Http\Controllers'    
+Route::middleware('jwt.auth')->group(function () {   
 
-], function ($router) {
     /*  POST: /players : crea un jugador*/
     Route::post('players', [UserController::class,'player'])->name('player');
 
@@ -34,6 +35,8 @@ Route::group([
     Route::put('player/{id}', [UserController::class,'update'])->name('player');
     
     /*POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.*/
+    Route::get('/players/games', [GamblingController::class,'shake'])->name('shake');
+
     Route::post('/players/{id}/games', [GamblingController::class,'games'])->name('games');
 
     /*  DELETE /players/{id}/games: elimina les tirades del jugador*/
@@ -55,8 +58,9 @@ Route::group([
     Route::get('/players/winner', [GamblingController::class,'winner'])->name('winner');
 
 
-    Route::post('login', [AuthController::class,'login'])->name('login');
-    Route::post('logout', 'AuthController@logout');
+    
+    
+    Route::get('logout', 'AuthController@logout')->name('logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 

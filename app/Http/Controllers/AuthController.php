@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
+
     /**
      * Get a JWT token via given credentials.
      *
@@ -26,9 +28,10 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
+        if ($token = JWTAuth::attempt($credentials)) {           
+            //return $this->respondWithToken($token);            
+            return response()->json(['token' =>$token], 202);
 
-        if ($token = $this->guard()->attempt($credentials)) {
-            return $this->respondWithToken($token);
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
@@ -40,7 +43,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function me(){
-        return response()->json($this->guard()->user());
+      //  return response()->json($this->guard()->user());
     }
 
     /**
@@ -49,9 +52,9 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout(){
-        $this->guard()->logout();
+    /*    $this->guard()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Successfully logged out']);*/
     }
 
     /**
@@ -60,7 +63,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh(){
-        return $this->respondWithToken($this->guard()->refresh());
+       // return $this->respondWithToken($this->guard()->refresh());
     }
 
     /**
@@ -71,11 +74,12 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken($token){
-        return response()->json([
+    
+    /*    return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60
-        ]);
+        ]);*/
     }
 
     /**
@@ -84,6 +88,6 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Auth\Guard
      */
     public function guard(){
-        return Auth::guard();
+    //    return Auth::guard();
     }
 }
