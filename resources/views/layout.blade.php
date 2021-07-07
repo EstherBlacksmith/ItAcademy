@@ -16,21 +16,20 @@
   </head>
   <body>   
   <ul class="nav">
-
-    <li class="nav-item">
-        <a class="nav-link" href="{{Route('logout')}}">Logout</a>
-    </li>
-    <li class="nav-item">
-        <button type="button" onclick="play()"  class="btn btn-info">Play!</button>
-    </li>
-    
     <li class="nav-item">
         <a class="nav-link active" href="{{Route('loginView')}}">Login</a>
     </li>  
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{Route('logout')}}">Logout</a>
+    </li>
 
     <li class="nav-item">
-        <button type="button" onclick="delete()"  class="btn btn-info">Delete</button>
+        <button type="button" onclick="play()"  class="btn btn-info">Play!</button>
+    </li>
+
+    <li class="nav-item">
+        <button type="button" onclick="Delete()"  class="btn btn-info">Delete</button>
     </li>
    
     <li class="nav-item">
@@ -57,59 +56,14 @@
     @yield('content')
 
 <div><p id="tittle"></p></div>
-<div class="col col-3">
+<div class="col col-3"><p id="score"></p>
 </div>
 <div class="col col-6">
 <button type="button" id="shakeButton" onClick="Shake()" type="hidden">Shake!!</button>
+
+
 </div>
-
-<script>
-
-function play(){ 
-    axios.defaults.headers.common = {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    };
-    axios({
-        method: 'get',
-        url: '/api/players/games',
-    })
-    .then(response => {
-        // Obtenemos los datos
-        console.log(response.data);
-        document.getElementById("tittle").value = "Play!"; 
-        document.getElementById("shakeButton").style.display = 'block';
-
-    })
-    .catch(e => {      
-        console.log(e);
-        // Capturamos los errores
-    });
-}
-
-function Shake(){
-   
-    axios.defaults.headers.common = {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      'Content-Type': 'text/plain;charset=utf-8',
-    };
-    
-    axios({
-        _method: 'post',
-        url: '/api/players/games'
-    })   
-    .then(response => {
-        // Obtenemos los datos
-        console.log(response);
-
-    })
-    .catch(e => {
-        console.log(e);
-        // Capturamos los errores
-    })
-    
-}
-
-</script>
+@include('scripts')
  
 </body>
     

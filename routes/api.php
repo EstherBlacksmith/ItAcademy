@@ -35,7 +35,7 @@ Route::middleware('jwt.auth')->group(function () {
     Route::put('player/{id}', [UserController::class,'update'])->name('player');
     
     /*POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.*/
-    Route::get('/players/games', [GamblingController::class,'shake'])->name('shake');
+    Route::post('/players/{id}/games', [GamblingController::class,'shake'])->name('shake');
 
     Route::post('/players/{id}/games', [GamblingController::class,'games'])->name('games');
 

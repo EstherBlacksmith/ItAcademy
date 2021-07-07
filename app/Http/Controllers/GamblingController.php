@@ -31,8 +31,7 @@ class GamblingController extends Controller
     }
 
     /*POST /players/{id}/games/ : un jugador específic realitza una tirada dels daus.*/
-    public function games(){
-        $id = JWTAuth::user()->id;
+    public function games($id){   
 
         $d_1 = rand(1, 6);
         $d_2 = rand(1, 6);
@@ -43,11 +42,11 @@ class GamblingController extends Controller
         $game->user_id = $id;
         $game->save();
 
-        return response()->json(['d_1' => $d_1]);
+        return response()->json(['d_1' => $d_1, 'd_2' => $d_2]);
     }
 
     /*DELETE /players/{id}/games: elimina les tirades del jugador*/
-    public function delete($id){
+    public function Delete($id){
         if(Auth::user()->hasRole('admin')){ //role control
             $games = gambling::all();
 
@@ -56,10 +55,10 @@ class GamblingController extends Controller
                     $game->delete();
                 }
             }
-            return response()->json(['deleted' => true]); 
+            return response()->json(['deleted' =>  "All the games from current user has been deleted"]); 
 
         }else{
-            return response()->json(['error' => 'The current user need permissions']); 
+            return response()->json(['deleted' => 'The current user need permissions']); 
         }
 
         
@@ -77,13 +76,14 @@ class GamblingController extends Controller
 
             return response()->json(['score' => $score ]);
         }else{
-            return response()->json(['error' => 'The current user need permissions']); 
+            return response()->json(['score' => 'The current user need permissions']); 
         }
     }
 
     /*GET /players/{id}/games: retorna el llistat de jugades per un jugador.*/
     public function mygames($id){
-        $games = gambling::where('user_id','=',$id)->get();
+        $games = gambling::where('user_id','=',$id)->get('d_1','d_2');
+
         return response()->json(['games' => $games ]);
     }
 
@@ -103,10 +103,9 @@ class GamblingController extends Controller
             if ($numPlayers > 0 && $totalScore > 0){
                 $score = ($numPlayers / $totalScore) * 100;
             }
-
-            return $score;
+            return response()->json(['score' => $score ]);
         }else{
-            return response()->json(['error' => 'The current user need permissions']); 
+            return response()->json(['score' => 'The current user need permissions']); 
         }
     }
 
@@ -123,9 +122,7 @@ class GamblingController extends Controller
                 $bestUser = $player;
             }           
         }
-
-        return response()->json(['bestPlayer' => $bestUser->name ]);
-
+        return response()->json(['bestPlayer' => $bestUser->name, 'totalScore' => $totalScore ]);
     }
 
     /*    GET /players/ranking/loser: retorna el jugador amb pitjor percentatge d’èxit*/
@@ -143,7 +140,7 @@ class GamblingController extends Controller
             }
         }
 
-        return response()->json(['worstPlayer' => $worstUser->name ]);
+        return response()->json(['worstPlayer' => $worstUser->name, 'totalScore' => $totalScore ]);
 
     }
 

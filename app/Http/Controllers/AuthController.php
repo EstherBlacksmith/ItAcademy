@@ -28,10 +28,12 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
-        if ($token = JWTAuth::attempt($credentials)) {           
-            //return $this->respondWithToken($token);            
-            return response()->json(['token' =>$token], 202);
 
+        if ($token = JWTAuth::attempt($credentials)) {           
+            //return $this->respondWithToken($token);   .
+            $id =JWTAuth::user()->id;          
+            return response()->json(['token' =>$token,'id'=> $id ], 202);
+            
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
