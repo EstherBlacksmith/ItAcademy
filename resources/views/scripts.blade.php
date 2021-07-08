@@ -33,6 +33,29 @@ function login(){
     });
 }
 
+function logout(){
+    
+    axios.defaults.headers.common = {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      'Content-Type': 'text/plain;charset=utf-8',
+    };
+    
+    axios({
+        method: 'get',
+        url: '/api/logout'
+    })   
+    .then(response => {
+        // Obtenemos los datos  
+        console.log(response.data.message);   
+        document.getElementById("tittle").innerHTML ="Logout!";
+    })
+    .catch(e => {
+        console.log(e);
+        // Capturamos los errores
+    })
+
+}
+/*
 function play(){ 
     axios.defaults.headers.common = {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -52,7 +75,7 @@ function play(){
         console.log(e);
         // Capturamos los errores
     });
-}
+}*/
 
 function Shake(){
    

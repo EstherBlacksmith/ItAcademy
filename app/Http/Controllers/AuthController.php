@@ -53,10 +53,36 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(){
-    /*    $this->guard()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);*/
+    public function logout( Request $request ) {
+
+        $token = $request->header( 'Authorization' );
+
+        try {
+            JWTAuth::parseToken()->invalidate( $token );
+
+            return response()->json( [
+                'error'   => false,
+                'message' => trans( 'auth.logged_out' )
+            ] );
+        } catch ( TokenExpiredException $exception ) {
+            return response()->json( [
+                'error'   => true,
+                'message' => trans( 'auth.token.expired' )
+
+            ], 401 );
+        } catch ( TokenInvalidException $exception ) {
+            return response()->json( [
+                'error'   => true,
+                'message' => trans( 'auth.token.invalid' )
+            ], 401 );
+
+        } catch ( JWTException $exception ) {
+            return response()->json( [
+                'error'   => true,
+                'message' => trans( 'auth.token.missing' )
+            ], 500 );
+        }
     }
 
     /**

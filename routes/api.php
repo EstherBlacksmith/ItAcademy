@@ -56,11 +56,8 @@ Route::middleware('jwt.auth')->group(function () {
 
     /*GET /players/ranking/winner: retorna el jugador amb pitjor percentatge d’èxit.*/
     Route::get('/players/winner', [GamblingController::class,'winner'])->name('winner');
-
-
     
-    
-    Route::get('logout', 'AuthController@logout')->name('logout');
+    Route::get('logout', [AuthController::class,'logout'])->name('logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 

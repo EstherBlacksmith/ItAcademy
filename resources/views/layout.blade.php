@@ -21,12 +21,12 @@
     </li>  
 
     <li class="nav-item">
-        <a class="nav-link" href="{{Route('logout')}}">Logout</a>
+        <button type="button" onclick="logout()"  class="btn btn-info">Logout</button>
     </li>
 
-    <li class="nav-item">
+   <!-- <li class="nav-item">
         <button type="button" onclick="play()"  class="btn btn-info">Play!</button>
-    </li>
+    </li>-->
 
     <li class="nav-item">
         <button type="button" onclick="Delete()"  class="btn btn-info">Delete</button>
